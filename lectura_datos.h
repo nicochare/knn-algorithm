@@ -12,8 +12,8 @@ typedef struct registro {
 
 FILE abrirArchivo(char*);
 
-void guardarRegistro(char*, Registro*);
+void cerrarArchivo(FILE);
+
+void guardarRegistro(char*, Registro*, i);
 
 Registro* leerDatos(FILE);
-
-void cerrarArchivo(FILE);

@@ -14,25 +14,29 @@ FILE abrirArchivo(char *ruta) {
     }
 }
 
-void guardarRegistro(char* buffer, Registro* datos) {
+void cerrarArchivo(FILE myFile) {
+    fclose(myFile);
+}
+
+void guardarRegistro(char* buffer, Registro* datos, int i) {
     char *token = strtok(buffer, ',');
-    datos[0].gender = token; 
+    datos[i].gender = token; 
     token = strtok(NULL, ",");
-    datos[0].age = token;
+    datos[i].age = token;
     token = strtok(NULL, ",");
-    datos[0].hypertension = token; 
+    datos[i].hypertension = token; 
     token = strtok(NULL, ",");
-    datos[0].heart_disease = token; 
+    datos[i].heart_disease = token; 
     token = strtok(NULL, ",");
-    datos[0].smoking_history = token; 
+    datos[i].smoking_history = token; 
     token = strtok(NULL, ",");
-    datos[0].bmi = token; 
+    datos[i].bmi = token; 
     token = strtok(NULL, ",");
-    datos[0].HbA1c_level = token; 
+    datos[i].HbA1c_level = token; 
     token = strtok(NULL, ",");
-    datos[0].blood_glucose_level = token; 
+    datos[i].blood_glucose_level = token; 
     token = strtok(NULL, ",");
-    datos[0].diabetes = token; 
+    datos[i].diabetes = token; 
     token = strtok(NULL, ",");
 }
 
@@ -45,13 +49,12 @@ Registro* leerDatos(FILE myfile) {
 
         char buffer[MAXCARACTERESLINEA];
         fgets(buffer, MAXCARACTERESLINEA, myFile);
-
+        
+        int i = 0;
         while (fgets(buffer, MAXCARACTERESLINEA, myFile)) {
-            guardarRegistro(buffer, datos);
+            guardarRegistro(buffer, datos, i);
+            i++;
         }
         return datos;
     }
 }
-
-
-    

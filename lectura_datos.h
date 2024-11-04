@@ -1,7 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct registro {
     int gender; // 0 = Hombre, 1 = Mujer
     float age;
-    float hypertension;
+    int hypertension;
     int heart_disease;
     int smoking_history;
     float bmi;
@@ -10,10 +14,8 @@ typedef struct registro {
     int diabetes; // 0 = No tiene, 1 = Tiene
 } Registro;
 
-FILE abrirArchivo(char*);
+FILE* abrirArchivo(char*);
 
-void cerrarArchivo(FILE);
+void cerrarArchivo(FILE*);
 
-void guardarRegistro(char*, Registro*, i);
-
-Registro* leerDatos(FILE);
+Registro* leerDatos(FILE*);

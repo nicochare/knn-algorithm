@@ -1,4 +1,4 @@
-#include "minMonticulo.h"
+#include "min_monticulo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -95,7 +95,7 @@ tipoElementoMinMonticulo devolverRaiz(tipoMinMonticulo mm) {
 
 void mostrarAnchura(tipoMinMonticulo mm) {
 	for (int i = 0; i <= mm.pos; i++) {
-		printf("%d ", mm.array[i]);
+		printf("%d ", mm.array[i].distancia);
 	}
 }
 

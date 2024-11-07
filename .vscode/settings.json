@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"*.html": "html",
+		"procesamiento_datos.h": "c"
+	}
+}

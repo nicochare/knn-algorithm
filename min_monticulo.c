@@ -48,17 +48,33 @@ void insertarMinMonticulo(tipoMinMonticulo* mm, Registro reg, float distancia) {
 	}
 }
 
+bool compararRegistrosIguales(Registro reg1, Registro reg2) {
+	return (reg1.gender == reg2.gender &&
+            reg1.age == reg2.age &&
+            reg1.hypertension == reg2.hypertension &&
+            reg1.heart_disease == reg2.heart_disease &&
+            reg1.smoking_history == reg2.smoking_history &&
+            reg1.bmi == reg2.bmi &&
+            reg1.HbA1c_level == reg2.HbA1c_level &&
+            reg1.blood_glucose_level == reg2.blood_glucose_level &&
+            reg1.diabetes == reg2.diabetes);
+}
+
+bool compararElemsIguales(tipoElementoMinMonticulo elem, tipoElementoMinMonticulo elem2) {
+    return (elem.distancia == elem2.distancia && compararRegistrosIguales(elem.reg, elem2.reg));
+}
+
 void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 	if (esVacio(*mm)) {
 		printf("\nError. No se puede eliminar elementos de un minmonticulo vacío.");
 	}
 	else {
 		int auxpos, i = 0;
-		while (i <= mm->pos && mm->array[i] != elem) {
+		while (i <= mm->pos && !compararElemsIguales(mm->array[i], elem)) {
 			i += 1;
 		}
 
-		if (mm->array[i] != elem) {
+		if (!compararElemsIguales(mm->array[i], elem)) {
 			printf("\nError. El elemento no existe.");
 		}
 		else {

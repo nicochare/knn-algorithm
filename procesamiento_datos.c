@@ -60,7 +60,7 @@ void guardar_registro(char* linea_leida, Registro* datos, int i) {
     token = strtok(NULL, ",");
 }
 
-Registro* leer_datos(char* ruta) {
+Registro* leer_datos(char* ruta, tipoMinMonticulo* mm) {
     FILE* dataset = abrir_archivo(ruta);
 
     if (dataset == NULL) {

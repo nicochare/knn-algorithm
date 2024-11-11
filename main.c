@@ -1,8 +1,13 @@
 #include "procesamiento_datos.h"
+#include "min_monticulo.h"
 #include <stdio.h>
+#define TAMANIODATASET 100000
 
 int main() {
-    Registro* datos = leer_datos("diabetes_prediction_dataset.csv");
+    tipoMinMonticulo mm;
+    nuevoMinMonticulo(&mm, TAMANIODATASET);
+
+    leer_datos("diabetes_prediction_dataset.csv", &mm);
 
     if (datos == NULL) {
         printf("\nError de lectura de datos.\n");

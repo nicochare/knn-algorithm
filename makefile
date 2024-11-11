@@ -11,5 +11,5 @@ modulo_procesamiento: procesamiento_datos.c
 modulo_minmonticulo: min_monticulo.c
 	gcc $(PARAMS) -c min_monticulo.c
 
-main: main.c lectura_datos.o procesamiento_datos.o modulo_minmonticulo.o
-	gcc $(PARAMS) main.c -o main lectura_datos.o procesamiento_datos.o modulo_minmonticulo.o
+main: main.c lectura_datos.o procesamiento_datos.o min_monticulo.o
+	gcc $(PARAMS) main.c -o main.o lectura_datos.o procesamiento_datos.o min_monticulo.o

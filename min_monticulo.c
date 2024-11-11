@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-void nuevoMaxMonticulo(tipoMinMonticulo* mm, int numel) {
+void nuevoMinMonticulo(tipoMinMonticulo* mm, int numel) {
 	mm->pos = -1;
 	mm->numEl = numel;
 	mm->array = (tipoElementoMinMonticulo*)malloc(numel * sizeof(tipoElementoMinMonticulo));
@@ -28,9 +28,9 @@ int hijoder(int pos) {
 	return pos * 2 + 2;
 }
 
-void insertarMaxMonticulo(tipoMinMonticulo* mm, Registro reg, int distancia) {
+void insertarMinMonticulo(tipoMinMonticulo* mm, Registro reg, int distancia) {
 	if (estaLleno(*mm)) {
-		printf("\nError. No se puede añadir elementos a un maxmonticulo lleno.");
+		printf("\nError. No se puede añadir elementos a un minmonticulo lleno.");
 	}
 	else {
 		int auxpos;
@@ -50,7 +50,7 @@ void insertarMaxMonticulo(tipoMinMonticulo* mm, Registro reg, int distancia) {
 
 void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 	if (esVacio(*mm)) {
-		printf("\nError. No se puede eliminar elementos de un maxmonticulo vacío.");
+		printf("\nError. No se puede eliminar elementos de un minmonticulo vacío.");
 	}
 	else {
 		int auxpos, i = 0;
@@ -88,7 +88,7 @@ tipoElementoMinMonticulo devolverRaiz(tipoMinMonticulo mm) {
 		return (mm.array[0]);
 	}
 	else {
-		printf("\nError. No se puede devolver la raiz de un maxmonticulo vacio.");
+		printf("\nError. No se puede devolver la raiz de un minmonticulo vacio.");
 		exit(-1);
 	}
 }

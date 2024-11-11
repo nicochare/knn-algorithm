@@ -6,14 +6,19 @@
 int main() {
     tipoMinMonticulo mm;
     nuevoMinMonticulo(&mm, TAMANIODATASET);
-
-    leer_datos("diabetes_prediction_dataset.csv", &mm);
+    
+    char* ruta = "diabetes_prediction_dataset.csv"
+    
+    mostrar_funcionamiento(ruta)
+    
+    Registro reg_buscado = obtener_registro_buscado();
+    leer_datos(ruta, &mm, reg_buscado);
 
     if (esVacio(mm)) {
         printf("\nError de lectura de datos.\n");
         return 1;
-    }
-    else {
+    } else {
+
         int i = 0;
         printf("GENERO - ");
         printf("EDAD - ");

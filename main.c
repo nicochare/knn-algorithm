@@ -9,7 +9,7 @@ int main() {
 
     leer_datos("diabetes_prediction_dataset.csv", &mm);
 
-    if (datos == NULL) {
+    if (esVacio(mm)) {
         printf("\nError de lectura de datos.\n");
         return 1;
     }
@@ -24,18 +24,20 @@ int main() {
         printf("NIVELES HbA1C - ");
         printf("NIVELES GLUCOSA - ");
         printf("TIENE DIABETES\n");
-        while (i < 10) {
-            printf("   %d   - ", datos[i].gender);
-            printf("%0.1f - ", datos[i].age);
-            printf("%d - ", datos[i].hypertension);
-            printf("%d - ", datos[i].heart_disease);
-            printf("%d - ", datos[i].smoking_history);
-            printf("%f - ", datos[i].bmi);
-            printf("%f - ", datos[i].HbA1c_level);
-            printf("%d - ", datos[i].blood_glucose_level);
-            printf("%d", datos[i].diabetes);
+        tipoElementoMinMonticulo aux;
+        while (!esVacio) {
+            aux = devolverRaiz(mm);
+            printf("   %d   - ", aux.reg.gender);
+            printf("%0.1f - ", aux.reg.age);
+            printf("%d - ", aux.reg.hypertension);
+            printf("%d - ", aux.reg.heart_disease);
+            printf("%d - ", aux.reg.smoking_history);
+            printf("%f - ", aux.reg.bmi);
+            printf("%f - ", aux.reg.HbA1c_level);
+            printf("%d - ", aux.reg.blood_glucose_level);
+            printf("%d", aux.reg.diabetes);
             printf("\n");
-            i++;
+            eliminarElemento(&mm, devolverRaiz(mm));
         }
     }
     return 0;

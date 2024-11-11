@@ -14,7 +14,7 @@ typedef struct tMM {
 
 void nuevoMinMonticulo(tipoMinMonticulo*, int);
 
-void insertarMinMonticulo(tipoMinMonticulo*, Registro, int);
+void insertarMinMonticulo(tipoMinMonticulo*, Registro, float);
 
 void eliminarElemento(tipoMinMonticulo*, tipoElementoMinMonticulo);
 

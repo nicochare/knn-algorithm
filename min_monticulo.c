@@ -28,7 +28,7 @@ int hijoder(int pos) {
 	return pos * 2 + 2;
 }
 
-void insertarMinMonticulo(tipoMinMonticulo* mm, Registro reg, int distancia) {
+void insertarMinMonticulo(tipoMinMonticulo* mm, Registro reg, float distancia) {
 	if (estaLleno(*mm)) {
 		printf("\nError. No se puede añadir elementos a un minmonticulo lleno.");
 	}

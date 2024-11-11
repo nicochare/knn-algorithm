@@ -10,7 +10,7 @@ typedef struct tMM {
 	tipoElementoMinMonticulo* array;
 	int pos;
 	int numEl;
-}tipoMinMonticulo;
+} tipoMinMonticulo;
 
 void nuevoMinMonticulo(tipoMinMonticulo*, int);
 

@@ -64,6 +64,10 @@ bool compararElemsIguales(tipoElementoMinMonticulo elem, tipoElementoMinMonticul
     return (elem.distancia == elem2.distancia && compararRegistrosIguales(elem.reg, elem2.reg));
 }
 
+void eliminarElementoIndice(tipoMinMonticulo* mm, int pos) {
+	eliminarElemento(mm, mm->array[pos]);
+}
+
 void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 	if (esVacio(*mm)) {
 		printf("\nError. No se puede eliminar elementos de un minmonticulo vacío.");

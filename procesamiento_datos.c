@@ -62,7 +62,11 @@ Registro guardar_registro(char* linea_leida) {
     token = strtok(NULL, ",");
 }
 
-Registro leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
+void mostrar_registro(Registro reg) {
+ 
+}
+
+void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
     FILE* dataset = abrir_archivo(ruta);
 
     if (dataset == NULL) {
@@ -76,14 +80,12 @@ Registro leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
         Registro reg;
         while (linea_leida != NULL) {
             reg = guardar_registro(linea_leida);
-            normalizar_registro(reg);
-            distancia = calcular_distancia_registros(reg, reg_buscado);
+            tratar_registro(reg_buscado, &reg, &distancia);
             insertarMinMonticulo(mm, reg, distancia);
             linea_leida = leer_linea(dataset);
             i++;
         }
 
         cerrar_archivo(dataset);
-        return reg;
     }
 }

@@ -1,3 +1,3 @@
 #include "algoritmo_knn.h"
 
-Registro* leer_datos(char*, tipoMinMonticulo*);
+void leer_datos(char*, tipoMinMonticulo*, Registro);

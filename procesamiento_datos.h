@@ -1,3 +1,5 @@
-#include "algoritmo_knn.h"
+#include "min_monticulo.h"
 
 void leer_datos(char*, tipoMinMonticulo*, Registro);
+
+void mostrar_funcionamiento(char*);

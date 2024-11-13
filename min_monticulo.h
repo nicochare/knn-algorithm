@@ -1,5 +1,5 @@
-#include <stdbool.h>
 #include "algoritmo_knn.h"
+#include <stdbool.h>
 
 typedef struct tipoEl {
 	Registro reg;

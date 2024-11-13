@@ -1,5 +1,4 @@
 #include "algoritmo_knn.h"
-#include "procesamiento_datos.h"
 #include <math.h>
 
 float normalizar(float v, float max, float min) {

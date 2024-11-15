@@ -2,4 +2,4 @@
 
 void leer_datos(char*, tipoMinMonticulo*, Registro);
 
-void mostrar_funcionamiento(char*);
+void mostrar_normalizacion(char*);

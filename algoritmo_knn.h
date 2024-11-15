@@ -10,5 +10,5 @@ typedef struct registro {
     int diabetes; // 0 = No tiene, 1 = Tiene
 } Registro;
 
-void normalizar_registro(Registro);
+void normalizar_registro(Registro*);
 float calcular_distancia_registros(Registro, Registro);

@@ -6,14 +6,14 @@ float normalizar(float v, float max, float min) {
 }
 
 void normalizar_registro(Registro* r) {
-    r->gender = normalizar((float)r->gender, 1.0, 0.0);
+    r->gender = normalizar(r->gender, 1.0, 0.0);
     r->age = normalizar(r->age, 80.0, 0.08);
-    r->hypertension = normalizar((float)r->hypertension, 1.0, 0.0);
-    r->heart_disease = normalizar((float)r->heart_disease, 1.0, 0.0);
-    r->smoking_history = normalizar((float)r->smoking_history, 6.0, 1.0);
+    r->hypertension = normalizar(r->hypertension, 1.0, 0.0);
+    r->heart_disease = normalizar(r->heart_disease, 1.0, 0.0);
+    r->smoking_history = normalizar(r->smoking_history, 6.0, 1.0);
     r->bmi = normalizar(r->bmi, 95.69, 10.01);
     r->HbA1c_level = normalizar(r->HbA1c_level, 9.0, 3.5);
-    r->blood_glucose_level = normalizar((float)r->blood_glucose_level, 300.0, 80.0);
+    r->blood_glucose_level = normalizar(r->blood_glucose_level, 300.0, 80.0);
 }
 
 float calcular_distancia_registros(Registro r1, Registro r2) {

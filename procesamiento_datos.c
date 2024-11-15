@@ -64,15 +64,15 @@ Registro guardar_registro(char* linea_leida) {
 }
 
 void mostrar_registro(Registro reg) {
-    printf("genero: %d ", reg.gender);
-    printf("edad: %f ", reg.age);
-    printf("hipertension: %d ", reg.hypertension);
-    printf("enfermedad cardíaca: %d ", reg.heart_disease);
-    printf("fumador: %d ", reg.smoking_history);
-    printf("IMC: %f ", reg.bmi);
-    printf("Niveles HbA1c: %f ", reg.HbA1c_level);
-    printf("Niveles glucosa: %d ", reg.blood_glucose_level);
-    (reg.diabetes == 1 ? printf("Tiene diabetes: 1 (Si)") : printf("Tiene diabetes: 2 (No)"));
+    printf("genero: %0.2f ", reg.gender);
+    printf("edad: %0.2f ", reg.age);
+    printf("hipertension: %0.2f ", reg.hypertension);
+    printf("enfermedad cardíaca: %0.2f ", reg.heart_disease);
+    printf("fumador: %0.2f ", reg.smoking_history);
+    printf("IMC: %0.2f ", reg.bmi);
+    printf("Niveles HbA1c: %0.2f ", reg.HbA1c_level);
+    printf("Niveles glucosa: %0.2f ", reg.blood_glucose_level);
+    (reg.diabetes == 1 ? printf("Tiene diabetes: 1 (Si)") : printf("Tiene diabetes: 0 (No)"));
 }
 
 void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
@@ -104,10 +104,14 @@ void mostrar_normalizacion(char* ruta) {
         printf("\nError. El archivo debe estar abierto.\n");
         exit(-1);
     } else {
+        printf("\nEjemplo de normalización de datos con los primeros 20 registros del dataset.\n");
         char* linea_leida;
         int i = 0;
         Registro reg;
         Registro* array = (Registro*)malloc(20*sizeof(Registro));
+        
+        // Salto primera linea (columnas)
+        linea_leida = leer_linea(dataset);
 
         while ((linea_leida = leer_linea(dataset)) != NULL && i < 20) {
             reg = guardar_registro(linea_leida);
@@ -115,7 +119,6 @@ void mostrar_normalizacion(char* ruta) {
             free(linea_leida);
             i++;
         }
-        printf("\nASDASD\n");
         printf("DATOS SIN NORMALIZAR:\n");
         for (int j = 0; j < i; j++) {
             mostrar_registro(array[j]);

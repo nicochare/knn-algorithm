@@ -18,9 +18,11 @@ void cerrar_archivo(FILE* fichero) {
 
 char* leer_linea(FILE* fichero) {
     if (fichero != NULL) {
-        char* linea = NULL;
-        if (fgets(linea, sizeof(linea), fichero)) {
-            return linea;
+        char* linea = (char*)malloc(MAXCARACTERESLINEA*sizeof(char));
+        if (linea != NULL) {
+            if (fgets(linea, MAXCARACTERESLINEA, fichero)) {
+                return linea;
+            }
         }
     }
     return NULL;

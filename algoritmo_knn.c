@@ -1,4 +1,5 @@
 #include "algoritmo_knn.h"
+#include "min_monticulo.h"
 #include <math.h>
 
 float normalizar(float v, float max, float min) {
@@ -27,4 +28,23 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
              pow(r1.HbA1c_level - r2.HbA1c_level, 2) + 
              pow(r1.blood_glucose_level - r2.blood_glucose_level, 2)
             ));
+}
+
+void algoritmo_knn(tipoMinMonticulo mm, int k, Registro* reg_buscado) {
+    int contDiabetes = 0;
+    int contNoDiabetes = 0;
+    for (int i = 0; i < k; i++) {
+        if (mm.array[i].reg.diabetes = 0) {
+            contNoDiabetes++;
+        }
+        else {
+            contDiabetes++;
+        }
+    }
+    if (contDiabetes >= contNoDiabetes) {
+        reg_buscado->diabetes = 1;
+    }
+    else {
+        reg_buscado->diabetes = 0;
+    }
 }

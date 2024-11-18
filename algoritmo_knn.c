@@ -60,10 +60,12 @@ int algoritmo_knn(tipoMinMonticulo mm, int k) {
 }
 
 // si el la clase predicha por knn no coincide con la del elemento, este elemento se descarta
-void algoritmo_enn(tipoMinMonticulo* mm, int k) {
+void algoritmo_enn(tipoMinMonticulo mm, int k, tipoMinMonticulo* mm_limpio) {
     for (int i = 0; i < 100000; i++) {
-        if (algoritmo_knn(*mm, k) != mm->array[i].reg.diabetes) {
-            eliminarElementoIndice(*mm, i);
+        if (algoritmo_knn(mm, k) == mm.array[i].reg.diabetes) {
+            float distancia = mm.array[i].distancia;
+            Registro reg = mm.array[i].reg;
+            insertarMinMonticulo(&mm_limpio, reg, distancia);
         }
     }
 }

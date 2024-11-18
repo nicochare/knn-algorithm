@@ -30,7 +30,8 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
             ));
 }
 
-void algoritmo_knn(tipoMinMonticulo mm, int k, Registro* reg_buscado) {
+// devuelve la clase predicha por el algoritmo
+int algoritmo_knn(tipoMinMonticulo mm, int k) {
     int contDiabetes = 0;
     int contNoDiabetes = 0;
     for (int i = 0; i < k; i++) {
@@ -42,9 +43,18 @@ void algoritmo_knn(tipoMinMonticulo mm, int k, Registro* reg_buscado) {
         }
     }
     if (contDiabetes >= contNoDiabetes) {
-        reg_buscado->diabetes = 1;
+        return 1;
     }
     else {
-        reg_buscado->diabetes = 0;
+        return 0;
+    }
+}
+
+// si el la clase predicha por knn no coincide con la del elemento, este elemento se descarta
+void algoritmo_enn(tipoMinMonticulo* mm, int k) {
+    for (int i = 0; i < 100000; i++) {
+        if (algoritmo_knn(*mm, k) != mm->array[i].reg.diabetes) {
+            // descartar elemento
+        }
     }
 }

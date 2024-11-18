@@ -42,7 +42,16 @@ int algoritmo_knn(tipoMinMonticulo mm, int k) {
             contDiabetes++;
         }
     }
-    if (contDiabetes >= contNoDiabetes) {
+    // provisional, si es igual, se mira el siguiente
+    if (contDiabetes == contNoDiabetes) {
+        if (mm.array[k].reg.diabetes = 0) {
+            contNoDiabetes++;
+        }
+        else {
+            contDiabetes++;
+        }
+    }
+    if (contDiabetes > contNoDiabetes) { 
         return 1;
     }
     else {
@@ -54,7 +63,7 @@ int algoritmo_knn(tipoMinMonticulo mm, int k) {
 void algoritmo_enn(tipoMinMonticulo* mm, int k) {
     for (int i = 0; i < 100000; i++) {
         if (algoritmo_knn(*mm, k) != mm->array[i].reg.diabetes) {
-            // descartar elemento
+            eliminarElementoIndice(*mm, i);
         }
     }
 }

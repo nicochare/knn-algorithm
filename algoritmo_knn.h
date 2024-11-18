@@ -12,3 +12,4 @@ typedef struct registro {
 
 void normalizar_registro(Registro*);
 float calcular_distancia_registros(Registro, Registro);
+void algoritmo_knn(tipoMinMonticulo, int, Registro*);

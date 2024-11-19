@@ -32,15 +32,14 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
 
 // devuelve la clase predicha por el algoritmo
 int algoritmo_knn(tipoMinMonticulo mm, int k) {
-    int contDiabetes = 0;
-    int contNoDiabetes = 0;
-    for (int i = 0; i < k; i++) {
-        if (mm.array[i].reg.diabetes = 0) {
+    int contDiabetes = 0, contNoDiabetes = 0, i = 0;
+    while (!esVacio(mm) && i < mm.pos) {
+        if (devolverRaiz(mm).reg.diabetes == 0) {
             contNoDiabetes++;
-        }
-        else {
+        } else {
             contDiabetes++;
         }
+        eliminarElemento(&mm, devolverRaiz(mm));
     }
     // provisional, si es igual, se mira el siguiente
     if (contDiabetes == contNoDiabetes) {

@@ -51,12 +51,7 @@ int algoritmo_knn(tipoMinMonticulo mm, int k) {
             contDiabetes++;
         }
     }
-    if (contDiabetes > contNoDiabetes) { 
-        return 1;
-    }
-    else {
-        return 0;
-    }
+    return contDiabetes > contNoDiabetes;
 }
 
 // si el la clase predicha por knn no coincide con la del elemento, este elemento se descarta

@@ -54,7 +54,7 @@ int main() {
     
     Registro reg_buscado = obtener_registro_buscado();
     normalizar_registro(&reg_buscado);
-    
+
     leer_datos(ruta, &mm, reg_buscado);
 
     if (esVacio(mm)) {
@@ -69,7 +69,8 @@ int main() {
         printf("BMI - ");
         printf("NIVELES HbA1C - ");
         printf("NIVELES GLUCOSA - ");
-        printf("TIENE DIABETES\n");
+        printf("TIENE DIABETES - ");
+        printf("DISTANCIA\n");
         
         tipoElementoMinMonticulo aux;
         int i = 0;
@@ -84,7 +85,8 @@ int main() {
             printf("%f - ", aux.reg.bmi);
             printf("%f - ", aux.reg.HbA1c_level);
             printf("%f - ", aux.reg.blood_glucose_level);
-            printf("%f", aux.reg.diabetes);
+            printf("%f - ", aux.reg.diabetes);
+            printf("%f", aux.distancia);
             printf("\n");
             eliminarElemento(&mm, devolverRaiz(mm));
         }

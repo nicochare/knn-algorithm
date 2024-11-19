@@ -14,7 +14,7 @@ typedef struct registro {
 
 typedef struct tipoEl {
 	Registro reg;
-	int distancia;
+	float distancia;
 } tipoElementoMinMonticulo;
 
 typedef struct tMM {

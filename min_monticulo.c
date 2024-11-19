@@ -115,7 +115,7 @@ tipoElementoMinMonticulo devolverRaiz(tipoMinMonticulo mm) {
 
 void mostrarAnchura(tipoMinMonticulo mm) {
 	for (int i = 0; i <= mm.pos; i++) {
-		printf("%d ", mm.array[i].distancia);
+		printf("%f ", mm.array[i].distancia);
 	}
 }
 

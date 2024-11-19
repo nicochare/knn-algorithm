@@ -84,13 +84,15 @@ void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
     }
     else {
         char* linea_leida;
-
-        int distancia = 0;
+        float distancia = 0;
         Registro reg;
+
         leer_linea(dataset); // Nombres de columnas
+        
         while ((linea_leida = leer_linea(dataset)) != NULL) {
             reg = guardar_registro(linea_leida);
-            //tratar_registro(reg_buscado, &reg, &distancia);
+            normalizar_registro(&reg);
+            distancia = calcular_distancia_registros(reg_buscado, reg);
             insertarMinMonticulo(mm, reg, distancia);
         }
 

@@ -40,7 +40,6 @@ int algoritmo_knn(tipoMinMonticulo mm, int k) {
         }
         eliminarElemento(&mm, devolverRaiz(mm));
     }
-    // provisional, si es igual, se mira el siguiente
     if (contDiabetes == contNoDiabetes) {
         return (devolverRaiz(mm).reg.diabetes == 0 ? 0 : 1);
     }

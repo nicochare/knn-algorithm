@@ -43,12 +43,7 @@ int algoritmo_knn(tipoMinMonticulo mm, int k) {
     }
     // provisional, si es igual, se mira el siguiente
     if (contDiabetes == contNoDiabetes) {
-        if (mm.array[k].reg.diabetes = 0) {
-            contNoDiabetes++;
-        }
-        else {
-            contDiabetes++;
-        }
+        return (devolverRaiz(mm).reg.diabetes == 0 ? 0 : 1);
     }
     return contDiabetes > contNoDiabetes;
 }

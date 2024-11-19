@@ -1,6 +1,6 @@
 PARAMS = -Wall -g
 
-all: modulo_algoritmo modulo_lectura modulo_procesamiento modulo_minmonticulo main
+all: main
 
 modulo_algoritmo: algoritmo_knn.c
 	gcc $(PARAMS) -c algoritmo_knn.c

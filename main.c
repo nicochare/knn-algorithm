@@ -53,6 +53,8 @@ int main() {
     mostrar_normalizacion(ruta);
     
     Registro reg_buscado = obtener_registro_buscado();
+    normalizar_registro(&reg_buscado);
+    
     leer_datos(ruta, &mm, reg_buscado);
 
     if (esVacio(mm)) {

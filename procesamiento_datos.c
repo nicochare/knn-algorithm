@@ -87,6 +87,7 @@ void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
 
         int distancia = 0;
         Registro reg;
+        leer_linea(dataset); // Nombres de columnas
         while ((linea_leida = leer_linea(dataset)) != NULL) {
             reg = guardar_registro(linea_leida);
             //tratar_registro(reg_buscado, &reg, &distancia);

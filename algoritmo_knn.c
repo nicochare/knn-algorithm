@@ -53,7 +53,7 @@ void algoritmo_enn(tipoMinMonticulo mm, int k, tipoMinMonticulo* mm_limpio) {
         if (algoritmo_knn(mm, k) == mm.array[i].reg.diabetes) {
             float distancia = mm.array[i].distancia;
             Registro reg = mm.array[i].reg;
-            insertarMinMonticulo(&mm_limpio, reg, distancia);
+            insertarMinMonticulo(mm_limpio, reg, distancia);
         }
     }
 }

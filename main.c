@@ -52,38 +52,40 @@ int main() {
 
     mostrar_normalizacion(ruta);
     
-    // Registro reg_buscado = obtener_registro_buscado();
-    // leer_datos(ruta, &mm, reg_buscado);
+    Registro reg_buscado = obtener_registro_buscado();
+    leer_datos(ruta, &mm, reg_buscado);
 
-    // if (esVacio(mm)) {
-    //     printf("\nError de lectura de datos.\n");
-    //     return 1;
-    // } else {
-    //     printf("GENERO - ");
-    //     printf("EDAD - ");
-    //     printf("HIPERTENSION - ");
-    //     printf("ENFERMEDAD CARDIACA - ");
-    //     printf("FUMA - ");
-    //     printf("BMI - ");
-    //     printf("NIVELES HbA1C - ");
-    //     printf("NIVELES GLUCOSA - ");
-    //     printf("TIENE DIABETES\n");
+    if (esVacio(mm)) {
+        printf("\nError de lectura de datos.\n");
+        return 1;
+    } else {
+        printf("GENERO - ");
+        printf("EDAD - ");
+        printf("HIPERTENSION - ");
+        printf("ENFERMEDAD CARDIACA - ");
+        printf("FUMA - ");
+        printf("BMI - ");
+        printf("NIVELES HbA1C - ");
+        printf("NIVELES GLUCOSA - ");
+        printf("TIENE DIABETES\n");
         
-    //     tipoElementoMinMonticulo aux;
-    //     while (!esVacio(mm)) {
-    //         aux = devolverRaiz(mm);
-    //         printf("   %f   - ", aux.reg.gender);
-    //         printf("%0.1f - ", aux.reg.age);
-    //         printf("%f - ", aux.reg.hypertension);
-    //         printf("%f - ", aux.reg.heart_disease);
-    //         printf("%f - ", aux.reg.smoking_history);
-    //         printf("%f - ", aux.reg.bmi);
-    //         printf("%f - ", aux.reg.HbA1c_level);
-    //         printf("%f - ", aux.reg.blood_glucose_level);
-    //         printf("%f", aux.reg.diabetes);
-    //         printf("\n");
-    //         eliminarElemento(&mm, devolverRaiz(mm));
-    //     }
-    // }
+        tipoElementoMinMonticulo aux;
+        int i = 0;
+        while (!esVacio(mm) && i < 20) {
+            i++;
+            aux = devolverRaiz(mm);
+            printf("   %f   - ", aux.reg.gender);
+            printf("%0.1f - ", aux.reg.age);
+            printf("%f - ", aux.reg.hypertension);
+            printf("%f - ", aux.reg.heart_disease);
+            printf("%f - ", aux.reg.smoking_history);
+            printf("%f - ", aux.reg.bmi);
+            printf("%f - ", aux.reg.HbA1c_level);
+            printf("%f - ", aux.reg.blood_glucose_level);
+            printf("%f", aux.reg.diabetes);
+            printf("\n");
+            eliminarElemento(&mm, devolverRaiz(mm));
+        }
+    }
     return 0;
 }

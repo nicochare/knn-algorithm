@@ -78,26 +78,20 @@ void mostrar_registro(Registro reg) {
 void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
     FILE* dataset = abrir_archivo(ruta);
 
-    if (dataset == NULL) {
-        printf("\Error. El archivo debe estar abierto.\n");
-        exit(-1);
-    }
-    else {
-        char* linea_leida;
-        float distancia = 0;
-        Registro reg;
+    char* linea_leida;
+    float distancia = 0;
+    Registro reg;
 
-        leer_linea(dataset); // Nombres de columnas
+    leer_linea(dataset); // Nombres de columnas
         
-        while ((linea_leida = leer_linea(dataset)) != NULL) {
-            reg = guardar_registro(linea_leida);
-            normalizar_registro(&reg);
-            distancia = calcular_distancia_registros(reg_buscado, reg);
-            insertarMinMonticulo(mm, reg, distancia);
-        }
-
-        cerrar_archivo(dataset);
+    while ((linea_leida = leer_linea(dataset)) != NULL) {
+        reg = guardar_registro(linea_leida);
+        normalizar_registro(&reg);
+        distancia = calcular_distancia_registros(reg_buscado, reg);
+        insertarMinMonticulo(mm, reg, distancia);
     }
+
+    cerrar_archivo(dataset);
 }
 
 void mostrar_normalizacion(char* ruta) {

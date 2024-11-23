@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #define CANTLINEAS 100000
 
-Registro guardar_registro(char* linea_leida) {
+Registro procesar_linea(char* linea_leida) {
     Registro reg;
     char* token = strtok(linea_leida, ",");
     if (strcmp(token, "Male") == 0) {
@@ -77,15 +77,15 @@ void mostrar_registro(Registro reg) {
 
 void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
     FILE* dataset = abrir_archivo(ruta);
-
-    char* linea_leida;
     float distancia = 0;
+    char* linea_leida;
     Registro reg;
 
-    leer_linea(dataset); // Nombres de columnas
+    // Salto primera linea (nombres de columnas)
+    leer_linea(dataset); 
         
     while ((linea_leida = leer_linea(dataset)) != NULL) {
-        reg = guardar_registro(linea_leida);
+        reg = procesar_linea(linea_leida);
         normalizar_registro(&reg);
         distancia = calcular_distancia_registros(reg_buscado, reg);
         insertarMinMonticulo(mm, reg, distancia);
@@ -97,38 +97,34 @@ void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
 void mostrar_normalizacion(char* ruta) {
     FILE* dataset = abrir_archivo(ruta);
 
-    if (dataset == NULL) {
-        printf("\nError. El archivo debe estar abierto.\n");
-        exit(-1);
-    } else {
-        printf("\nEjemplo de normalización de datos con los primeros 20 registros del dataset.\n");
-        char* linea_leida;
-        int i = 0;
-        Registro reg;
-        Registro* array = (Registro*)malloc(20*sizeof(Registro));
-        
-        // Salto primera linea (columnas)
-        linea_leida = leer_linea(dataset);
 
-        while ((linea_leida = leer_linea(dataset)) != NULL && i < 20) {
-            reg = guardar_registro(linea_leida);
-            array[i] = reg;
-            free(linea_leida);
-            i++;
-        }
-        printf("DATOS SIN NORMALIZAR:\n");
-        for (int j = 0; j < i; j++) {
-            mostrar_registro(array[j]);
-            printf("\n");
-        }
-        printf("DATOS NORMALIZADOS:\n");
-        for (int j = 0; j < i; j++) {
-            normalizar_registro(&array[j]);
-            mostrar_registro(array[j]);
-            printf("\n");
-        }
+    printf("\nEjemplo de normalización de datos con los primeros 20 registros del dataset.\n");
+    char* linea_leida;
+    int i = 0;
+    Registro reg;
+    Registro* array = (Registro*)malloc(20*sizeof(Registro));
+    
+    // Salto primera linea (nombres de columnas)
+    linea_leida = leer_linea(dataset);
 
-        free(array);
-        cerrar_archivo(dataset);
+    while ((linea_leida = leer_linea(dataset)) != NULL && i < 20) {
+        reg = procesar_linea(linea_leida);
+        array[i] = reg;
+        free(linea_leida);
+        i++;
     }
+    printf("DATOS SIN NORMALIZAR:\n");
+    for (int j = 0; j < i; j++) {
+        mostrar_registro(array[j]);
+        printf("\n");
+    }
+    printf("DATOS NORMALIZADOS:\n");
+    for (int j = 0; j < i; j++) {
+        normalizar_registro(&array[j]);
+        mostrar_registro(array[j]);
+        printf("\n");
+    }
+
+    free(array);
+    cerrar_archivo(dataset);
 }

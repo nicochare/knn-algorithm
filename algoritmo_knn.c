@@ -55,8 +55,8 @@ bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
         i++;
     }
 
-    for (int j = 0; j < i; j++) {
-        insertarMinMonticulo(mm, arrayAux[j].reg, arrayAux[j].distancia);
+    for (i = 0; i < k; i++) {
+        insertarMinMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
     }
     free(arrayAux);
 

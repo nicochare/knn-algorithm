@@ -77,17 +77,16 @@ void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 			i += 1;
 		}
 
-		if (!compararElemsIguales(mm->array[i], elem)) {
+		if (i > mm->pos) {
 			printf("\nError. El elemento no existe.");
 		} else {
 			auxpos = i;
 			mm->array[auxpos] = mm->array[mm->pos];
 			mm->pos -= 1;
 
-			while (
-				(hijoder(auxpos) <= mm->pos && 
+			while ((hijoder(auxpos) <= mm->pos) && 
 				mm->array[auxpos].distancia > mm->array[hijoizq(auxpos)].distancia ||
-					mm->array[auxpos].distancia > mm->array[hijoder(auxpos)].distancia)) {										
+					mm->array[auxpos].distancia > mm->array[hijoder(auxpos)].distancia) {										
 				if (mm->array[hijoizq(auxpos)].distancia > mm->array[hijoder(auxpos)].distancia) {
 					swap(mm, auxpos, hijoder(auxpos));
 					auxpos = hijoder(auxpos);

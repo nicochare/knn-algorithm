@@ -65,9 +65,9 @@ bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
     return contDiabetes > contNoDiabetes;
 }
 
-void interpretacion_resultado(bool result) {
+void interpretacion_resultado(bool resultado) {
     printf("\nLa predicción de la clase dice que el sujeto");
-    if (!result) printf(" no");
+    if (!resultado) printf(" no");
     printf(" tiene diabetes\n");
 }
 
@@ -85,7 +85,7 @@ void algoritmo_enn(tipoMinMonticulo* mm, int k, tipoMinMonticulo* mm_limpio) {
         } else {
             nBorrados++;
             borrados = (int*)realloc(borrados, nBorrados * sizeof(int));
-            borrados[nBorrados-1] = i;
+            borrados[nBorrados - 1] = i;
         }
     }
     for (int i = 0; i < nBorrados; i++) {

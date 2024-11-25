@@ -27,6 +27,8 @@ void nuevoMinMonticulo(tipoMinMonticulo*, int);
 
 void insertarMinMonticulo(tipoMinMonticulo*, Registro, float);
 
+void eliminarElementoIndice(tipoMinMonticulo*, int);
+
 void eliminarElemento(tipoMinMonticulo*, tipoElementoMinMonticulo);
 
 tipoElementoMinMonticulo devolverRaiz(tipoMinMonticulo);

@@ -1,5 +1,6 @@
 #include "algoritmo_knn.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 float normalizar(float v, float max, float min) {
@@ -31,12 +32,13 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
 }
 
 // devuelve la clase predicha por el algoritmo
-int algoritmo_knn(tipoMinMonticulo* mm, int k) {
+bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
     tipoElementoMinMonticulo* arrayAux = (tipoElementoMinMonticulo*)malloc(k*sizeof(tipoElementoMinMonticulo));
     tipoElementoMinMonticulo raiz;
+
     while (!esVacio(*mm) && i < k) {
-        raiz = devolverRaiz(*mm); 
+        raiz = devolverRaiz(*mm);
         (raiz.reg.diabetes ? contDiabetes++ : contNoDiabetes++);
         arrayAux[i] = raiz;
         eliminarElemento(mm, raiz);
@@ -46,18 +48,19 @@ int algoritmo_knn(tipoMinMonticulo* mm, int k) {
     i = 0;
     while (i < k) {
         insertarMinMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
+        i++;
     }
     free(arrayAux);
 
-    if (contDiabetes == contNoDiabetes) {
+    if (contDiabetes == contNoDiabetes && !esVacio(*mm)) {
         return (devolverRaiz(*mm).reg.diabetes ? 1 : 0);
     }
     return contDiabetes > contNoDiabetes;
 }
 
-void interpretacion_resultado(int result) {
-    printf("La predicción de la clase dice que el sujeto ");
-    if (!result) printf("no");
+void interpretacion_resultado(bool result) {
+    printf("\nLa predicción de la clase dice que el sujeto");
+    if (!result) printf(" no");
     printf(" tiene diabetes\n");
 }
 

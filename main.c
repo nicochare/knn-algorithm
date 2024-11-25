@@ -56,7 +56,7 @@ Registro obtener_registro_buscado() {
 
 int obtener_k() {
     int k = 0;
-    while (k < 1) {
+    while (k < 1 || k > TAMANIODATASET) {
         printf("Por favor, introduce la K a utilizar: ");
         scanf("%d", &k);
     }
@@ -82,7 +82,7 @@ int main() {
         printf("\nError de lectura de datos.\n");
         return 1;
     } else {
-        int resultado = algoritmo_knn(&mm, k);
+        bool resultado = algoritmo_knn(&mm, k);
         interpretacion_resultado(resultado);
     }
     return 0;

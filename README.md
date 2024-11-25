@@ -16,32 +16,3 @@ usar en linux
 ### messi
 ## messi
 # messi
-
-void eliminarElemento(tipoMinMonticulo *m, tipoElementoMinMonticulo e) {
-    if (esVacio(*m)) {
-        printf("ERROR: monticulo vacio\n");
-    }
-    else {
-		int posElem = 0;
-		while (posElem < m->pos && m->array[posElem] != e) {
-			posElem++;
-		}
-		if (m->array[posElem] != e) {
-			printf("ERROR: elemento no esta en el maxMonticulo\n");
-		}
-		else {
-			m->pos--;
-			intercambio(&m->array[posElem], &m->array[m->pos]);
-			while((posElem <= m->pos && posElem*2+1 <= m->pos && posElem*2+2 <= m->pos) && (m->array[posElem] > m->array[posElem*2+1] || m->array[posElem] > m->array[posElem*2+2])) {
-				if (m->array[posElem*2+1] < m->array[posElem*2+2]) {
-					intercambio(&m->array[posElem], &m->array[posElem*2+1]);
-					posElem = posElem*2+1;
-				}
-				else {
-					intercambio(&m->array[posElem], &m->array[posElem*2+2]);
-					posElem = posElem*2+2;
-				}
-			}
-		}
-	}      
-}

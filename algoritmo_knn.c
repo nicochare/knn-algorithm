@@ -1,4 +1,5 @@
 #include "algoritmo_knn.h"
+#include <stdio.h>
 #include <math.h>
 
 float normalizar(float v, float max, float min) {
@@ -30,28 +31,42 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
 }
 
 // devuelve la clase predicha por el algoritmo
-int algoritmo_knn(tipoMinMonticulo mm, int k) {
+int algoritmo_knn(tipoMinMonticulo* mm, int k) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
-    while (!esVacio(mm) && i < mm.pos) {
-        if (devolverRaiz(mm).reg.diabetes == 0) {
-            contNoDiabetes++;
-        } else {
-            contDiabetes++;
-        }
-        eliminarElemento(&mm, devolverRaiz(mm));
+    tipoElementoMinMonticulo* arrayAux = (tipoElementoMinMonticulo*)malloc(k*sizeof(tipoElementoMinMonticulo));
+    tipoElementoMinMonticulo raiz;
+    while (!esVacio(*mm) && i < k) {
+        raiz = devolverRaiz(*mm); 
+        (raiz.reg.diabetes ? contDiabetes++ : contNoDiabetes++);
+        arrayAux[i] = raiz;
+        eliminarElemento(mm, raiz);
+        i++;
     }
+    
+    i = 0;
+    while (i < k) {
+        insertarMinMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
+    }
+    free(arrayAux);
+
     if (contDiabetes == contNoDiabetes) {
-        return (devolverRaiz(mm).reg.diabetes == 0 ? 0 : 1);
+        return (devolverRaiz(*mm).reg.diabetes ? 1 : 0);
     }
     return contDiabetes > contNoDiabetes;
 }
 
+void interpretacion_resultado(int result) {
+    printf("La predicción de la clase dice que el sujeto ");
+    if (!result) printf("no");
+    printf(" tiene diabetes\n");
+}
+
 // si el la clase predicha por knn no coincide con la del elemento, este elemento se descarta
-void algoritmo_enn(tipoMinMonticulo mm, int k, tipoMinMonticulo* mm_limpio) {
+void algoritmo_enn(tipoMinMonticulo* mm, int k, tipoMinMonticulo* mm_limpio) {
     for (int i = 0; i < 100000; i++) {
-        if (algoritmo_knn(mm, k) == mm.array[i].reg.diabetes) {
-            float distancia = mm.array[i].distancia;
-            Registro reg = mm.array[i].reg;
+        if (algoritmo_knn(mm, k) == mm->array[i].reg.diabetes) {
+            float distancia = mm->array[i].distancia;
+            Registro reg = mm->array[i].reg;
             insertarMinMonticulo(mm_limpio, reg, distancia);
         }
     }

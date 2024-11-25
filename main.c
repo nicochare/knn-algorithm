@@ -54,6 +54,15 @@ Registro obtener_registro_buscado() {
 //     printf("\n\n");
 // }
 
+int obtener_k() {
+    int k = 0;
+    while (k < 1) {
+        printf("Por favor, introduce la K a utilizar: ");
+        scanf("%d", &k);
+    }
+    return k;
+}
+
 int main() {
     tipoMinMonticulo mm;
     nuevoMinMonticulo(&mm, TAMANIODATASET);
@@ -65,22 +74,16 @@ int main() {
     Registro reg_buscado = obtener_registro_buscado();
     normalizar_registro(&reg_buscado);
 
+    int k = obtener_k();
+
     leer_datos(ruta, &mm, reg_buscado);
 
     if (esVacio(mm)) {
         printf("\nError de lectura de datos.\n");
         return 1;
     } else {
-        // funcion_lee_arbol_mm(mm);
-        tipoElementoMinMonticulo aux;
-        int i = 0;
-        while (!esVacio(mm) && i < 20) {
-            i++;
-            aux = devolverRaiz(mm);
-            mostrar_registro_distancia(aux.reg, aux.distancia);
-            printf("\n");
-            eliminarElemento(&mm, devolverRaiz(mm));
-        }
+        int resultado = algoritmo_knn(&mm, k);
+        interpretacion_resultado(resultado);
     }
     return 0;
 }

@@ -2,5 +2,6 @@
 
 void normalizar_registro(Registro*);
 float calcular_distancia_registros(Registro, Registro);
-int algoritmo_knn(tipoMinMonticulo, int);
-void algoritmo_enn(tipoMinMonticulo, int, tipoMinMonticulo*);
+void interpretacion_resultado(int);
+int algoritmo_knn(tipoMinMonticulo*, int);
+void algoritmo_enn(tipoMinMonticulo*, int, tipoMinMonticulo*);

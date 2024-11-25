@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"*.html": "html",
-		"procesamiento_datos.h": "c",
-		"algoritmo_knn.h": "c",
-		"min_monticulo.h": "c",
-		"string.h": "c"
-	}
-}

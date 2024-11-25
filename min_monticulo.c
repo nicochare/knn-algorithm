@@ -1,7 +1,6 @@
 #include "min_monticulo.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 void nuevoMinMonticulo(tipoMinMonticulo* mm, int numel) {
 	mm->pos = -1;
@@ -17,7 +16,7 @@ void swap(tipoMinMonticulo* mm1, int pos1, int pos2) {
 }
 
 int padre(int pos) {
-	return floor((pos - 1) / 2);
+	return (pos - 1) / 2;
 }
 
 int hijoizq(int pos) {
@@ -80,21 +79,19 @@ void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 
 		if (!compararElemsIguales(mm->array[i], elem)) {
 			printf("\nError. El elemento no existe.");
-		}
-		else {
+		} else {
 			auxpos = i;
 			mm->array[auxpos] = mm->array[mm->pos];
 			mm->pos -= 1;
 
 			while (
-				(mm->array[auxpos].distancia < mm->array[hijoizq(auxpos)].distancia ||
-					mm->array[auxpos].distancia < mm->array[hijoder(auxpos)].distancia) 
+				(mm->array[auxpos].distancia > mm->array[hijoizq(auxpos)].distancia ||
+					mm->array[auxpos].distancia > mm->array[hijoder(auxpos)].distancia) 
 				&& hijoder(auxpos) <= mm->pos) {										
-				if (mm->array[hijoizq(auxpos)].distancia < mm->array[hijoder(auxpos)].distancia) {
+				if (mm->array[hijoizq(auxpos)].distancia > mm->array[hijoder(auxpos)].distancia) {
 					swap(mm, auxpos, hijoder(auxpos));
 					auxpos = hijoder(auxpos);
-				}
-				else {
+				} else {
 					swap(mm, auxpos, hijoizq(auxpos));
 					auxpos = hijoizq(auxpos);
 				}

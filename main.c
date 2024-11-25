@@ -1,4 +1,5 @@
 #include "procesamiento_datos.h"
+#include <math.h>
 #include <stdio.h>
 #define TAMANIODATASET 100000
 
@@ -44,6 +45,15 @@ Registro obtener_registro_buscado() {
     return reg;
 }
 
+// void funcion_lee_arbol_mm(tipoMinMonticulo mm) {
+//     int j = 1;
+//     printf("\n\n");
+//     for (int i = 0; i < 20; i++) {
+//         printf("%f ", mm.array[i].distancia);
+//     }
+//     printf("\n\n");
+// }
+
 int main() {
     tipoMinMonticulo mm;
     nuevoMinMonticulo(&mm, TAMANIODATASET);
@@ -61,6 +71,7 @@ int main() {
         printf("\nError de lectura de datos.\n");
         return 1;
     } else {
+        // funcion_lee_arbol_mm(mm);
         tipoElementoMinMonticulo aux;
         int i = 0;
         while (!esVacio(mm) && i < 20) {

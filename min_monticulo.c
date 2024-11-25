@@ -85,9 +85,9 @@ void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 			mm->pos -= 1;
 
 			while (
-				(mm->array[auxpos].distancia > mm->array[hijoizq(auxpos)].distancia ||
-					mm->array[auxpos].distancia > mm->array[hijoder(auxpos)].distancia) 
-				&& hijoder(auxpos) <= mm->pos) {										
+				(hijoder(auxpos) <= mm->pos && 
+				mm->array[auxpos].distancia > mm->array[hijoizq(auxpos)].distancia ||
+					mm->array[auxpos].distancia > mm->array[hijoder(auxpos)].distancia)) {										
 				if (mm->array[hijoizq(auxpos)].distancia > mm->array[hijoder(auxpos)].distancia) {
 					swap(mm, auxpos, hijoder(auxpos));
 					auxpos = hijoder(auxpos);
@@ -98,6 +98,14 @@ void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 			}
 		}
 	}
+}
+
+void eliminarRaiz(tipoMinMonticulo* mm) {
+	if (esVacio(*mm)) {
+		printf("\nError. No se puede eliminar la raiz de un minmonticulo vacío.\n");
+    } else {
+		eliminarElemento(mm, mm->array[0]);
+    }
 }
 
 tipoElementoMinMonticulo devolverRaiz(tipoMinMonticulo mm) {

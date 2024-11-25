@@ -33,6 +33,8 @@ void eliminarElemento(tipoMinMonticulo*, tipoElementoMinMonticulo);
 
 tipoElementoMinMonticulo devolverRaiz(tipoMinMonticulo);
 
+void eliminarRaiz(tipoMinMonticulo*);
+
 void mostrarAnchura(tipoMinMonticulo);
 
 bool esVacio(tipoMinMonticulo);

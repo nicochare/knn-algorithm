@@ -51,7 +51,7 @@ bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
             contNoDiabetes++;
         }
         arrayAux[i] = raiz;
-        eliminarElemento(mm, raiz);
+        eliminarRaiz(mm);
         i++;
     }
 

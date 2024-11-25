@@ -66,11 +66,26 @@ void interpretacion_resultado(bool result) {
 
 // si el la clase predicha por knn no coincide con la del elemento, este elemento se descarta
 void algoritmo_enn(tipoMinMonticulo* mm, int k, tipoMinMonticulo* mm_limpio) {
+    int nElem = 100000;
+    printf("Registros antes de aplicar ENN: %d\n", nElem);
+    int* borrados;
+    int nBorrados = 0, indiceBorrados = 0;
     for (int i = 0; i < 100000; i++) {
         if (algoritmo_knn(mm, k) == mm->array[i].reg.diabetes) {
             float distancia = mm->array[i].distancia;
             Registro reg = mm->array[i].reg;
             insertarMinMonticulo(mm_limpio, reg, distancia);
         }
+        else {
+            nBorrados++;
+            realloc(borrados, nBorrados * sizeof(int));
+            borrados[indiceBorrados] = i;
+            indiceBorrados++;
+        }
     }
+    for (int i = 0; i < nBorrados; i++) {
+        eliminarElementoIndice(mm, borrados[i]);
+    }
+    nElem -= nBorrados;
+    printf("Registros despues de aplicar ENN: %d\n", nElem);
 }

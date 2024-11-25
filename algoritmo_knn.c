@@ -31,7 +31,6 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
             ));
 }
 
-// devuelve la clase predicha por el algoritmo
 bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
     tipoElementoMinMonticulo* arrayAux = (tipoElementoMinMonticulo*)malloc(k * sizeof(tipoElementoMinMonticulo));
@@ -73,7 +72,7 @@ void interpretacion_resultado(bool resultado) {
     printf(" tiene diabetes\n");
 }
 
-// si el la clase predicha por knn no coincide con la del elemento, este elemento se descarta
+// TODO: eliminar el elemento que se este comparando del minmonticulo y reagregarlo al final
 void algoritmo_enn(tipoMinMonticulo* mm, int k, tipoMinMonticulo* mm_limpio) {
     int nElem = 100000;
     printf("Registros antes de aplicar ENN: %d\n", nElem);

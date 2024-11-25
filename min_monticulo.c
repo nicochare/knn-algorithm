@@ -84,15 +84,16 @@ void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 			mm->array[auxpos] = mm->array[mm->pos];
 			mm->pos -= 1;
 
-			while ((hijoder(auxpos) <= mm->pos) && 
-				mm->array[auxpos].distancia > mm->array[hijoizq(auxpos)].distancia ||
-					mm->array[auxpos].distancia > mm->array[hijoder(auxpos)].distancia) {										
-				if (mm->array[hijoizq(auxpos)].distancia > mm->array[hijoder(auxpos)].distancia) {
-					swap(mm, auxpos, hijoder(auxpos));
-					auxpos = hijoder(auxpos);
+			while (hijoizq(auxpos) <= mm->pos) {
+				int menorHijo = hijoizq(auxpos);
+				if (hijoder(auxpos) <= mm->pos && mm->array[hijoder(auxpos)].distancia < mm->array[hijoizq(auxpos)].distancia) {
+					menorHijo = hijoder(auxpos);
+				}
+				if (mm->array[auxpos].distancia > mm->array[menorHijo].distancia) {
+					swap(mm, auxpos, menorHijo); 
+					auxpos = menorHijo;
 				} else {
-					swap(mm, auxpos, hijoizq(auxpos));
-					auxpos = hijoizq(auxpos);
+					auxpos = mm->pos + 1; // Para salir del bucle
 				}
 			}
 		}

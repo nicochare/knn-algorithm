@@ -10,4 +10,9 @@ usar en linux
 8. Pre-procesamiento del dataset mediante Algoritmo de Wilson (ENN)
 9. Evolución de la precisión de acierto en función del número de ejemplos y la K
 
+###### messi
+##### messi
+#### messi
+### messi
+## messi
 # messi

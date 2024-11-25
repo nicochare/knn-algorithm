@@ -88,8 +88,8 @@ void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 
 			while (
 				(mm->array[auxpos].distancia < mm->array[hijoizq(auxpos)].distancia ||
-					mm->array[auxpos].distancia < mm->array[hijoder(auxpos)].distancia)
-				&& hijoder(auxpos) <= mm->pos) {
+					mm->array[auxpos].distancia < mm->array[hijoder(auxpos)].distancia) 
+				&& hijoder(auxpos) <= mm->pos) {										
 				if (mm->array[hijoizq(auxpos)].distancia < mm->array[hijoder(auxpos)].distancia) {
 					swap(mm, auxpos, hijoder(auxpos));
 					auxpos = hijoder(auxpos);

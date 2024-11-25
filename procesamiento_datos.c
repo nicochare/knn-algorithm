@@ -2,7 +2,6 @@
 #include "lectura_datos.h"
 #include <string.h>
 #include <stdlib.h>
-#define CANTLINEAS 100000
 
 Registro procesar_linea(char* linea_leida) {
     Registro reg;
@@ -64,15 +63,27 @@ Registro procesar_linea(char* linea_leida) {
 }
 
 void mostrar_registro(Registro reg) {
-    printf("genero: %0.2f ", reg.gender);
-    printf("edad: %0.2f ", reg.age);
-    printf("hipertension: %0.2f ", reg.hypertension);
-    printf("enfermedad cardíaca: %0.2f ", reg.heart_disease);
-    printf("fumador: %0.2f ", reg.smoking_history);
-    printf("IMC: %0.2f ", reg.bmi);
-    printf("Niveles HbA1c: %0.2f ", reg.HbA1c_level);
-    printf("Niveles glucosa: %0.2f ", reg.blood_glucose_level);
-    (reg.diabetes == 1 ? printf("Tiene diabetes: 1 (Si)") : printf("Tiene diabetes: 0 (No)"));
+    printf("genero: %-6.2f ", reg.gender);
+    printf("edad: %-6.2f ", reg.age);
+    printf("hipertension: %-6.2f ", reg.hypertension);
+    printf("enfermedad cardíaca: %-6.2f ", reg.heart_disease);
+    printf("fumador: %-6.2f ", reg.smoking_history);
+    printf("IMC: %-6.2f ", reg.bmi);
+    printf("Niveles HbA1c: %-6.2f ", reg.HbA1c_level);
+    printf("Niveles glucosa: %-6.2f ", reg.blood_glucose_level);
+    (reg.diabetes == 1 ? printf("Tiene diabetes: 1 (Si) ") : printf("Tiene diabetes: 0 (No) "));
+}
+
+void mostrar_registro_distancia(Registro reg, float distancia) {
+    printf("genero: %-6.2f ", reg.gender);
+    printf("edad: %-6.2f ", reg.age);
+    printf("hipertension: %-6.2f ", reg.hypertension);
+    printf("enfermedad cardíaca: %-6.2f ", reg.heart_disease);
+    printf("fumador: %-6.2f ", reg.smoking_history);
+    printf("IMC: %-6.2f ", reg.bmi);
+    printf("Niveles HbA1c: %-6.2f ", reg.HbA1c_level);
+    printf("Niveles glucosa: %-6.2f ", reg.blood_glucose_level);
+    printf("Distancia: %-6.2f ", distancia);
 }
 
 void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {

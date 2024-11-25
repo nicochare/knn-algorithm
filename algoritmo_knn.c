@@ -34,7 +34,7 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
 // devuelve la clase predicha por el algoritmo
 bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
-    tipoElementoMinMonticulo* arrayAux = (tipoElementoMinMonticulo*)malloc(k*sizeof(tipoElementoMinMonticulo));
+    tipoElementoMinMonticulo* arrayAux = (tipoElementoMinMonticulo*)malloc(k * sizeof(tipoElementoMinMonticulo));
 
     if (arrayAux == NULL) {
         printf("\nError al reservar memoria\n");
@@ -45,21 +45,23 @@ bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
 
     while (!esVacio(*mm) && i < k) {
         raiz = devolverRaiz(*mm);
-        (raiz.reg.diabetes ? contDiabetes++ : contNoDiabetes++);
+        if (raiz.reg.diabetes) {
+            contDiabetes++;
+        } else {
+            contNoDiabetes++;
+        }
         arrayAux[i] = raiz;
         eliminarElemento(mm, raiz);
         i++;
     }
-    
-    i = 0;
-    while (i < k) {
-        insertarMinMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
-        i++;
+
+    for (int j = 0; j < i; j++) {
+        insertarMinMonticulo(mm, arrayAux[j].reg, arrayAux[j].distancia);
     }
     free(arrayAux);
 
     if (contDiabetes == contNoDiabetes && !esVacio(*mm)) {
-        return (devolverRaiz(*mm).reg.diabetes ? 1 : 0);
+        return devolverRaiz(*mm).reg.diabetes;
     }
 
     return contDiabetes > contNoDiabetes;
@@ -75,7 +77,7 @@ void interpretacion_resultado(bool resultado) {
 void algoritmo_enn(tipoMinMonticulo* mm, int k, tipoMinMonticulo* mm_limpio) {
     int nElem = 100000;
     printf("Registros antes de aplicar ENN: %d\n", nElem);
-    int* borrados;
+    int* borrados = NULL;
     int nBorrados = 0;
     for (int i = 0; i < 100000; i++) {
         if (algoritmo_knn(mm, k) == mm->array[i].reg.diabetes) {

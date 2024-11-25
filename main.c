@@ -61,7 +61,6 @@ int obtener_k() {
     return k;
 }
 
-
 int main() {
     tipoMinMonticulo mm;
     nuevoMinMonticulo(&mm, TAMANIODATASET);

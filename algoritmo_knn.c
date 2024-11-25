@@ -35,6 +35,12 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
 bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
     tipoElementoMinMonticulo* arrayAux = (tipoElementoMinMonticulo*)malloc(k*sizeof(tipoElementoMinMonticulo));
+
+    if (arrayAux == NULL) {
+        printf("\nError al reservar memoria\n");
+        exit(1);
+    }
+
     tipoElementoMinMonticulo raiz;
 
     while (!esVacio(*mm) && i < k) {
@@ -55,6 +61,7 @@ bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
     if (contDiabetes == contNoDiabetes && !esVacio(*mm)) {
         return (devolverRaiz(*mm).reg.diabetes ? 1 : 0);
     }
+
     return contDiabetes > contNoDiabetes;
 }
 
@@ -69,23 +76,23 @@ void algoritmo_enn(tipoMinMonticulo* mm, int k, tipoMinMonticulo* mm_limpio) {
     int nElem = 100000;
     printf("Registros antes de aplicar ENN: %d\n", nElem);
     int* borrados;
-    int nBorrados = 0, indiceBorrados = 0;
+    int nBorrados = 0;
     for (int i = 0; i < 100000; i++) {
         if (algoritmo_knn(mm, k) == mm->array[i].reg.diabetes) {
             float distancia = mm->array[i].distancia;
             Registro reg = mm->array[i].reg;
             insertarMinMonticulo(mm_limpio, reg, distancia);
-        }
-        else {
+        } else {
             nBorrados++;
-            realloc(borrados, nBorrados * sizeof(int));
-            borrados[indiceBorrados] = i;
-            indiceBorrados++;
+            borrados = (int*)realloc(borrados, nBorrados * sizeof(int));
+            borrados[nBorrados-1] = i;
         }
     }
     for (int i = 0; i < nBorrados; i++) {
         eliminarElementoIndice(mm, borrados[i]);
     }
+
+    free(borrados);
     nElem -= nBorrados;
     printf("Registros despues de aplicar ENN: %d\n", nElem);
 }

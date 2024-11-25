@@ -61,6 +61,7 @@ int obtener_k() {
     return k;
 }
 
+
 int main() {
     tipoMinMonticulo mm;
     nuevoMinMonticulo(&mm, TAMANIODATASET);
@@ -68,7 +69,7 @@ int main() {
     char* ruta = "diabetes_prediction_dataset.csv";
 
     mostrar_normalizacion(ruta);
-    
+
     Registro reg_buscado = obtener_registro_buscado();
     normalizar_registro(&reg_buscado);
 

@@ -14,5 +14,8 @@ modulo_procesamiento: procesamiento_datos.c
 modulo_minmonticulo: min_monticulo.c
 	gcc $(PARAMS) -c min_monticulo.c
 
-main: main.c lectura_datos.o algoritmo_knn.o procesamiento_datos.o min_monticulo.o
-	gcc $(PARAMS) main.c -o main.o algoritmo_knn.o -lm lectura_datos.o procesamiento_datos.o min_monticulo.o
+modulo_registro: registro.c
+	gcc $(PARAMS) -c registro.c
+
+main: main.c lectura_datos.o algoritmo_knn.o procesamiento_datos.o min_monticulo.o registro.o
+	gcc $(PARAMS) main.c -o main.o algoritmo_knn.o lectura_datos.o procesamiento_datos.o min_monticulo.o registro.o -lm

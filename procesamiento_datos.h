@@ -1,7 +1,8 @@
 #include "algoritmo_knn.h"
+#include "cola_registros.h"
 
-void leer_datos(char*, tipoMinMonticulo*, Registro);
+void cargar_datos(tipoCola*, tipoMinMonticulo*, Registro);
 
-void mostrar_registro_distancia(Registro, float);
+void normalizar_dataset(tipoCola*);
 
-void mostrar_normalizacion(char*);
+void cargar_en_cola(char*, tipoCola*);

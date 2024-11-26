@@ -38,7 +38,7 @@ void insertarMinMonticulo(tipoMinMonticulo* mm, Registro reg, float distancia) {
 		tipoElementoMinMonticulo elem;
 		elem.distancia = distancia;
 		elem.reg = reg;
-		mm->array[auxpos] = elem;
+		mm->array[auxpos] = elem; 
 
 		while (elem.distancia < mm->array[padre(auxpos)].distancia && auxpos > 0) {
 			swap(mm, auxpos, padre(auxpos));
@@ -83,6 +83,7 @@ void eliminarElemento(tipoMinMonticulo* mm, tipoElementoMinMonticulo elem) {
 			auxpos = i;
 			mm->array[auxpos] = mm->array[mm->pos];
 			mm->pos -= 1;
+
 
 			while (hijoizq(auxpos) <= mm->pos) {
 				int menorHijo = hijoizq(auxpos);

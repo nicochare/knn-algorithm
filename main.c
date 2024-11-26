@@ -2,55 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #define TAMANIODATASET 100000
-
-Registro obtener_registro_buscado() {
-    Registro reg;
-    
-    printf("Por favor, introduce los datos del registro a analizar:");
-    
-    do {
-        printf("\n    - Genero (0: Hombre, 1: Mujer): ");
-        scanf("%f", &reg.gender);
-    } while (reg.gender < 0 || reg.gender > 1);
-    
-    do {
-        printf("\n    - Edad: ");
-        scanf("%f", &reg.age);
-    } while (reg.age < 0);
-    
-    do {
-        printf("\n    - Hipertension (0: No, 1: Si): ");
-        scanf("%f", &reg.hypertension);
-    } while (reg.hypertension < 0 || reg.hypertension > 1);
-    
-    do {
-        printf("\n    - Enfermedad cardíaca (0: No, 1: Si): ");
-        scanf("%f", &reg.heart_disease);
-    } while (reg.heart_disease < 0 || reg.heart_disease > 1);
-    
-    do {        
-        printf("\n    - Historial de fumador");
-        printf("\n        - 1: Actual");
-        printf("\n        - 2: Anterior");
-        printf("\n        - 3: Sin información");
-        printf("\n        - 4: Nunca");
-        printf("\n        - 5: No ahora mismo");
-        printf("\n        - 6: Alguna vez lo fue\n    ----> ");
-        scanf("%f", &reg.smoking_history);
-    } while (reg.smoking_history < 1 || reg.smoking_history > 6);
-
-    do {
-        printf("\n    - IMC: ");
-        scanf("%f", &reg.bmi);
-    } while (reg.bmi < 0);
-
-    printf("\n    - Niveles hemoglobina A1c: ");
-    scanf("%f", &reg.HbA1c_level);
-    printf("\n    - Niveles glucosa en sangre: ");
-    scanf("%f", &reg.blood_glucose_level);
-
-    return reg;
-}
+#define RUTA "diabetes_prediction_dataset.csv"
 
 int obtener_k() {
     int k = 0;
@@ -61,28 +13,61 @@ int obtener_k() {
     return k;
 }
 
+void realizar_apartados(int k) {
+    
+}
+
 int main() {
+    Registro* conjuntoDeEjemplos = (Registro*)malloc(5*sizeof(Registro));
+    int k = obtener_k();
+    
+    // TODO: Apartado 1
+    tipoCola dataset;
+    nuevaCola(&dataset);
+    cargar_en_cola(RUTA, &dataset);
+
+    // TODO: Apartado 2
+    normalizar_dataset(&dataset);
+
+    // TODO: Apartado 3
     tipoMinMonticulo mm;
     nuevoMinMonticulo(&mm, TAMANIODATASET);
+
+    // TODO: Apartado 4
+    printf("\n\nClasificación de un ejemplo nuevo mediante K-NN para K=1\n");
     
-    char* ruta = "diabetes_prediction_dataset.csv";
+    Registro reg_buscado = new_registro(0.0, 37.0, 0.0, 0.0, 6.0, 25.72, 3.5, 149.0);
+    cargar_datos(&dataset, &mm, reg_buscado);
+    bool resultado = algoritmo_knn(&mm, 1);
+    interpretacion_resultado(resultado);
 
-    mostrar_normalizacion(ruta);
+    // TODO: Apartado 5
+    printf("\n\nClasificación de un conjunto de ejemplos mediante K-NN para K=1\n");
+    
+    int i = 0;
+    while (i < 5) {
+        Registro reg_buscado = conjuntoDeEjemplos[i];
+        normalizar_registro(&reg_buscado);
 
-    Registro reg_buscado = obtener_registro_buscado();
-    normalizar_registro(&reg_buscado);
-
-    int k = obtener_k();
-
-    leer_datos(ruta, &mm, reg_buscado);
-
-    if (esVacio(mm)) {
-        printf("\nError de lectura de datos.\n");
-        return 1;
-    } else {
-        bool resultado = algoritmo_knn(&mm, k);
+        cargar_datos(RUTA, &mm, reg_buscado);
+        resultado = algoritmo_knn(&conjuntoDeEjemplos, 1);
         interpretacion_resultado(resultado);
+        i++;
     }
 
+    printf("\n\nClasificación de un ejemplo nuevo mediante K-NN para K=k\n");
+    bool resultado = algoritmo_knn(mm, k);
+    interpretacion_resultado(resultado);
+
+    printf("\n\nClasificación de un conjunto de ejemplos mediante K-NN para K=k\n");
+    while (!esVacio(conjuntoDeEjemplos)) {
+        Registro reg_buscado = cima(conjuntoDeEjemplos);
+        normalizar_registro(&reg_buscado);
+
+        cargar_datos(RUTA, &mm, reg_buscado);
+        resultado = algoritmo_knn(&conjuntoDeEjemplos, k);
+        interpretacion_resultado(resultado);
+    }
+    
     return 0;
 }

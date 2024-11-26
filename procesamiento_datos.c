@@ -3,139 +3,68 @@
 #include <string.h>
 #include <stdlib.h>
 
-Registro procesar_linea(char* linea_leida) {
-    Registro reg;
-    char* token = strtok(linea_leida, ",");
-    if (strcmp(token, "Male") == 0) {
-        reg.gender = 0;
-    }
-    else {
-        reg.gender = 1;
-    }
-
-    token = strtok(NULL, ",");
-    reg.age = atof(token);
-
-    token = strtok(NULL, ",");
-    reg.hypertension = atoi(token);
-
-    token = strtok(NULL, ",");
-    reg.heart_disease = atoi(token);
-
-    token = strtok(NULL, ",");
-
-    int smoking_history;
-
-    if (strcmp(token, "current") == 0) {
-        smoking_history = 1;
-    }
-    else if (strcmp(token, "former") == 0) {
-        smoking_history = 2;
-    }
-    else if (strcmp(token, "No info") == 0) {
-        smoking_history = 3;
-    }
-    else if (strcmp(token, "never") == 0) {
-        smoking_history = 4;
-    }
-    else if (strcmp(token, "not current") == 0) {
-        smoking_history = 5;
-    }
-    else {
-        smoking_history = 6;
-    }
-
-    reg.smoking_history = smoking_history;
-
-    token = strtok(NULL, ",");
-    reg.bmi = atof(token);
-
-    token = strtok(NULL, ",");
-    reg.HbA1c_level = atof(token);
-
-    token = strtok(NULL, ",");
-    reg.blood_glucose_level = atoi(token);
-
-    token = strtok(NULL, ",");
-    reg.diabetes = atoi(token);
-    token = strtok(NULL, ",");
-    return reg;
-}
-
-void mostrar_registro(Registro reg) {
-    printf("genero: %-6.2f ", reg.gender);
-    printf("edad: %-6.2f ", reg.age);
-    printf("hipertension: %-6.2f ", reg.hypertension);
-    printf("enfermedad cardíaca: %-6.2f ", reg.heart_disease);
-    printf("fumador: %-6.2f ", reg.smoking_history);
-    printf("IMC: %-6.2f ", reg.bmi);
-    printf("Niveles HbA1c: %-6.2f ", reg.HbA1c_level);
-    printf("Niveles glucosa: %-6.2f ", reg.blood_glucose_level);
-    (reg.diabetes == 1 ? printf("Tiene diabetes: 1 (Si) ") : printf("Tiene diabetes: 0 (No) "));
-}
-
-void mostrar_registro_distancia(Registro reg, float distancia) {
-    printf("genero: %-6.2f ", reg.gender);
-    printf("edad: %-6.2f ", reg.age);
-    printf("hipertension: %-6.2f ", reg.hypertension);
-    printf("enfermedad cardíaca: %-6.2f ", reg.heart_disease);
-    printf("fumador: %-6.2f ", reg.smoking_history);
-    printf("IMC: %-6.2f ", reg.bmi);
-    printf("Niveles HbA1c: %-6.2f ", reg.HbA1c_level);
-    printf("Niveles glucosa: %-6.2f ", reg.blood_glucose_level);
-    printf("Distancia: %-6.2f ", distancia);
-}
-
-void leer_datos(char* ruta, tipoMinMonticulo* mm, Registro reg_buscado) {
-    FILE* dataset = abrir_archivo(ruta);
-    float distancia = 0;
+void cargar_en_cola(char* ruta, tipoCola* c) {
+    FILE* fichero = abrir_archivo(ruta);
     char* linea_leida;
     Registro reg;
 
-    // Salto primera linea (nombres de columnas)
-    leer_linea(dataset); 
-        
-    while ((linea_leida = leer_linea(dataset)) != NULL) {
+    while ((linea_leida = leer_linea(fichero)) != NULL) {
         reg = procesar_linea(linea_leida);
+        encolar(c, reg);
+        free(linea_leida);
+    }
+
+    cerrar_archivo(fichero);
+}
+
+void cargar_datos(tipoCola* c, tipoMinMonticulo* mm, Registro reg_buscado) {
+    float distancia = 0;
+    char* linea_leida;
+    Registro reg;
+    tipoCola c2;
+
+    nuevaCola(&c2);
+    while (!esNulaCola(*c)) {
+        reg = frente(*c);
+        desencolar(c);
+        encolar(&c2, reg);
         normalizar_registro(&reg);
         distancia = calcular_distancia_registros(reg_buscado, reg);
         insertarMinMonticulo(mm, reg, distancia);
     }
 
-    cerrar_archivo(dataset);
+    *c = c2;
 }
 
-void mostrar_normalizacion(char* ruta) {
-    FILE* dataset = abrir_archivo(ruta);
-
-
-    printf("\nEjemplo de normalización de datos con los primeros 20 registros del dataset.\n");
+void normalizar_dataset(tipoCola* c) {
     char* linea_leida;
     int i = 0;
     Registro reg;
     Registro* array = (Registro*)malloc(20*sizeof(Registro));
-    
-    // Salto primera linea (nombres de columnas)
-    linea_leida = leer_linea(dataset);
+    tipoCola c2;
+    nuevaCola(&c2);
 
-    while ((linea_leida = leer_linea(dataset)) != NULL && i < 20) {
-        reg = procesar_linea(linea_leida);
+    printf("\nEjemplo de normalización de datos con los primeros 20 registros del dataset.\n");
+    
+    printf("\nDATOS NO NORMALIZADOS\n");
+    while (!esNulaCola(*c)) {
+        reg = frente(*c);
+        desencolar(c);
+
+        mostrar_registro(reg);
+        
+        normalizar_registro(&reg);
         array[i] = reg;
-        free(linea_leida);
+        
+        encolar(&c2, reg);
         i++;
     }
-    printf("DATOS SIN NORMALIZAR:\n");
+
+    printf("\nDATOS NORMALIZADOS\n");
     for (int j = 0; j < i; j++) {
         mostrar_registro(array[j]);
-        printf("\n");
-    }
-    printf("DATOS NORMALIZADOS:\n");
-    for (int j = 0; j < i; j++) {
-        normalizar_registro(&array[j]);
-        mostrar_registro(array[j]);
-        printf("\n");
     }
 
     free(array);
-    cerrar_archivo(dataset);
+    *c = c2;
 }

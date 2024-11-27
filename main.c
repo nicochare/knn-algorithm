@@ -13,13 +13,8 @@ int obtener_k() {
     return k;
 }
 
-void realizar_apartados(int k) {
-    
-}
-
 int main() {
     Registro* conjuntoDeEjemplos = (Registro*)malloc(5*sizeof(Registro));
-    int k = obtener_k();
     
     // TODO: Apartado 1
     tipoCola dataset;
@@ -35,8 +30,18 @@ int main() {
 
     // TODO: Apartado 4
     printf("\n\nClasificación de un ejemplo nuevo mediante K-NN para K=1\n");
+    printf("Se utilizará un ejemplo de paciente con los siguientes datos:\n");
+    printf("    - Genero:              Hombre\n");
+    printf("    - Edad:                37\n");
+    printf("    - Hipertension:        No\n");
+    printf("    - Enfermedad Cardíaca: No\n");
+    printf("    - Historial fumador:   Alguna vez lo fue\n");
+    printf("    - BMI:                 25.72\n");
+    printf("    - Niveles HbA1c:       3.5\n");
+    printf("    - Niveles Glucosa:     149\n\n");
     
     Registro reg_buscado = new_registro(0.0, 37.0, 0.0, 0.0, 6.0, 25.72, 3.5, 149.0);
+    normalizar_registro(&reg_buscado);
     cargar_datos(&dataset, &mm, reg_buscado);
     bool resultado = algoritmo_knn(&mm, 1);
     interpretacion_resultado(resultado);
@@ -46,28 +51,54 @@ int main() {
     
     int i = 0;
     while (i < 5) {
-        Registro reg_buscado = conjuntoDeEjemplos[i];
+        reg_buscado = conjuntoDeEjemplos[i];
         normalizar_registro(&reg_buscado);
 
-        cargar_datos(RUTA, &mm, reg_buscado);
+        cargar_datos(&dataset, &mm, reg_buscado);
         resultado = algoritmo_knn(&conjuntoDeEjemplos, 1);
         interpretacion_resultado(resultado);
         i++;
     }
 
+    // TODO: Apartado 6
     printf("\n\nClasificación de un ejemplo nuevo mediante K-NN para K=k\n");
-    bool resultado = algoritmo_knn(mm, k);
+    printf("Se utilizará un ejemplo de paciente con los siguientes datos:\n");
+    printf("    - Genero:              Hombre\n");
+    printf("    - Edad:                37\n");
+    printf("    - Hipertension:        No\n");
+    printf("    - Enfermedad Cardíaca: No\n");
+    printf("    - Historial fumador:   Alguna vez lo fue\n");
+    printf("    - BMI:                 25.72\n");
+    printf("    - Niveles HbA1c:       3.5\n");
+    printf("    - Niveles Glucosa:     149\n\n");
+    
+    int k = obtener_k();
+    
+    reg_buscado = new_registro(0.0, 37.0, 0.0, 0.0, 6.0, 25.72, 3.5, 149.0);
+    normalizar_registro(&reg_buscado);    
+    
+    cargar_datos(&dataset, &mm, reg_buscado);
+    bool resultado = algoritmo_knn(&mm, k);
     interpretacion_resultado(resultado);
 
+    // TODO: Apartado 7
     printf("\n\nClasificación de un conjunto de ejemplos mediante K-NN para K=k\n");
-    while (!esVacio(conjuntoDeEjemplos)) {
-        Registro reg_buscado = cima(conjuntoDeEjemplos);
+    
+    k = obtener_k();
+    
+    i = 0;
+    while (i < 5) {
+        reg_buscado = conjuntoDeEjemplos[i];
         normalizar_registro(&reg_buscado);
 
-        cargar_datos(RUTA, &mm, reg_buscado);
-        resultado = algoritmo_knn(&conjuntoDeEjemplos, k);
+        cargar_datos(&dataset, &mm, reg_buscado);
+        resultado = algoritmo_knn(&conjuntoDeEjemplos, 1);
         interpretacion_resultado(resultado);
+        i++;
     }
+
+    // TODO: Apartado 8
+    
     
     return 0;
 }

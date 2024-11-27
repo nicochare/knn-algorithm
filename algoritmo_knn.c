@@ -45,7 +45,8 @@ void interpretacion_resultado(bool resultado) {
 }
 
 // TODO: eliminar el elemento que se este comparando del minmonticulo y reagregarlo al final
-void algoritmo_enn(tipoMinMonticulo* mm, int k, tipoMinMonticulo* mm_limpio) {
+// TODO: seguir cambianndo para usar cola c en vez de minmonticulo mm
+void algoritmo_enn(tipoCola* c, int k, tipoMinMonticulo* mm_limpio) {
     int nElem = 100000;
     printf("Registros antes de aplicar ENN: %d\n", nElem);
     int* borrados = NULL;

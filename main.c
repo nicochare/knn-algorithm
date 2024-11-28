@@ -25,8 +25,8 @@ int main() {
     normalizar_dataset(&dataset);
 
     // TODO: Apartado 3
-    tipoMinMonticulo mm;
-    nuevoMinMonticulo(&mm, TAMANIODATASET);
+    tipoMaxMonticulo mm;
+    nuevoMaxMonticulo(&mm, TAMANIODATASET);
 
     // TODO: Apartado 4
     printf("\n\nClasificación de un ejemplo nuevo mediante K-NN para K=1\n");

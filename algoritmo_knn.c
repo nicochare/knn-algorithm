@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-bool algoritmo_knn(tipoMinMonticulo* mm, int k) {
+bool algoritmo_knn(tipoMaxMonticulo* mm, int k) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
-    tipoElementoMinMonticulo* arrayAux = (tipoElementoMinMonticulo*)malloc(k * sizeof(tipoElementoMinMonticulo));
+    tipoElementoMaxMonticulo* arrayAux = (tipoElementoMaxMonticulo*)malloc(k * sizeof(tipoElementoMaxMonticulo));
 
     if (arrayAux == NULL) {
         printf("\nError al reservar memoria\n");
         exit(1);
     }
 
-    tipoElementoMinMonticulo raiz;
+    tipoElementoMaxMonticulo raiz;
 
     while (!esVacio(*mm) && i < k) {
         raiz = devolverRaiz(*mm);
@@ -46,7 +46,7 @@ void interpretacion_resultado(bool resultado) {
 
 // TODO: eliminar el elemento que se este comparando del minmonticulo y reagregarlo al final
 // TODO: seguir cambianndo para usar cola c en vez de minmonticulo mm
-void algoritmo_enn(tipoCola* c, int k, tipoMinMonticulo* mm_limpio) {
+void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
     int nElem = 100000;
     printf("Registros antes de aplicar ENN: %d\n", nElem);
     int* borrados = NULL;

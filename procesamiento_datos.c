@@ -17,20 +17,36 @@ void cargar_en_cola(char* ruta, tipoCola* c) {
     cerrar_archivo(fichero);
 }
 
-void cargar_datos(tipoCola* c, tipoMinMonticulo* mm, Registro reg_buscado) {
+void cargar_datos(tipoCola* c, tipoMaxMonticulo* mm, Registro reg_buscado, int k) {
     float distancia = 0;
+    int i = 0;
     char* linea_leida;
+    tipoElementoMaxMonticulo elem;
     Registro reg;
     tipoCola c2;
 
     nuevaCola(&c2);
+    while (!esNulaCola(*c) && i < k) {
+        reg = frente(*c);
+        desencolar(c);
+        encolar(&c2, reg);
+        normalizar_registro(&reg);
+        distancia = calcular_distancia_registros(reg_buscado, reg);
+        insertarMaxMonticulo(mm, reg, distancia);
+        i++;
+    }
+
     while (!esNulaCola(*c)) {
         reg = frente(*c);
         desencolar(c);
         encolar(&c2, reg);
         normalizar_registro(&reg);
         distancia = calcular_distancia_registros(reg_buscado, reg);
-        insertarMinMonticulo(mm, reg, distancia);
+        if (distancia < devolverRaiz(*mm).distancia) {
+            elem.distancia = distancia;
+            elem.reg = reg;
+            reemplazarRaiz(mm, elem);
+        }
     }
 
     *c = c2;

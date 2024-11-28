@@ -56,7 +56,7 @@ void normalizar_dataset(tipoCola* c) {
     char* linea_leida;
     int i = 0;
     Registro reg;
-    Registro* array = (Registro*)malloc(20*sizeof(Registro));
+    Registro* array = (Registro*)malloc(10*sizeof(Registro));
     tipoCola c2;
     nuevaCola(&c2);
 
@@ -67,13 +67,15 @@ void normalizar_dataset(tipoCola* c) {
         reg = frente(*c);
         desencolar(c);
 
-        mostrar_registro(reg);
+        // Solo guardar y mostrar los 10 primeros para mostrar de ejemplo
+        if (i < 10) {
+            mostrar_registro(reg);
+            array[i] = reg;
+            i++;
+        }
         
         normalizar_registro(&reg);
-        array[i] = reg;
-        
         encolar(&c2, reg);
-        i++;
     }
 
     printf("\nDATOS NORMALIZADOS\n");

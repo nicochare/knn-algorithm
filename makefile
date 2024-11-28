@@ -1,21 +1,17 @@
 PARAMS = -Wall -g
 
+FILES = main.c lectura_datos.c algoritmo_knn.c procesamiento_datos.c min_monticulo.c registro.c
+
+COMPILED = main.o lectura_datos.o algoritmo_knn.o procesamiento_datos.o min_monticulo.o registro.o
+
 all: main
 
-modulo_algoritmo: algoritmo_knn.c
-	gcc $(PARAMS) -c algoritmo_knn.c
+main: $(COMPILED)
+	gcc $(PARAMS) -o main.o $(COMPILED) -lm
 
-modulo_lectura: lectura_datos.c
-	gcc $(PARAMS) -c lectura_datos.c
+# compilar de .c a .o en base a la call que se haga
+%.o: %.c
+	gcc $(PARAMS) -c $< -o $@
 
-modulo_procesamiento: procesamiento_datos.c
-	gcc $(PARAMS) -c procesamiento_datos.c
-
-modulo_minmonticulo: min_monticulo.c
-	gcc $(PARAMS) -c min_monticulo.c
-
-modulo_registro: registro.c
-	gcc $(PARAMS) -c registro.c
-
-main: main.c lectura_datos.o algoritmo_knn.o procesamiento_datos.o min_monticulo.o registro.o
-	gcc $(PARAMS) main.c -o main.o algoritmo_knn.o lectura_datos.o procesamiento_datos.o min_monticulo.o registro.o -lm
+clean:
+	rm -rf *.o

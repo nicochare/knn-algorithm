@@ -15,11 +15,13 @@ typedef struct tMM {
 
 void nuevoMaxMonticulo(tipoMaxMonticulo*, int);
 
-void insertarMaxMonticulo(tipoMaxMonticulo *, tipoElementoMaxMonticulo);
+void insertarMaxMonticulo(tipoMaxMonticulo *, Registro, float);
 
 void eliminarElemento(tipoMaxMonticulo *, tipoElementoMaxMonticulo);
 
 void eliminarElementoIndice(tipoMaxMonticulo*, int);
+
+void eliminarRaiz(tipoMaxMonticulo*);
 
 tipoElementoMaxMonticulo devolverRaiz(tipoMaxMonticulo);
 

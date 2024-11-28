@@ -5,6 +5,7 @@
 void nuevaCola(tipoCola* c) {
     c->ini = NULL;
     c->fin = NULL;
+    c->cant = 0;
 }
 
 bool esNulaCola(tipoCola c) {
@@ -13,6 +14,7 @@ bool esNulaCola(tipoCola c) {
 
 void encolar(tipoCola* c, tipoElementoCola e) {
     celdaCola* nuevo;
+    c->cant += 1;
     nuevo = (celdaCola*)malloc(sizeof(celdaCola));
     if (nuevo != NULL) {
         nuevo->elem = e; 
@@ -38,6 +40,7 @@ void desencolar(tipoCola* c) {
         exit(-1);
     } else {
         celdaCola* aux;
+        c->cant -= 1;
         aux = c->ini;
         c->ini = c->ini->sig;
         free(aux);
@@ -51,4 +54,8 @@ tipoElementoCola frente(tipoCola c) {
     } else {
         return c.ini->elem;
     }
+}
+
+int devolverCantidad(tipoCola c) {
+    return c.cant;
 }

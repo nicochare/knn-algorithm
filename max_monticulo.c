@@ -1,7 +1,6 @@
 #include "max_monticulo.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 void nuevoMaxMonticulo(tipoMaxMonticulo* mm, int numel) {
     mm->pos = -1;
@@ -17,7 +16,7 @@ void swap(tipoMaxMonticulo* mm1, int pos1, int pos2) {
 }
 
 int padre(int pos) {
-    return floor((pos-1)/2);
+    return (pos-1)/2;
 }
 
 int hijoizq(int pos) {
@@ -72,28 +71,23 @@ void eliminarElemento(tipoMaxMonticulo* mm, tipoElementoMaxMonticulo elem) {
         printf("\nError. No se puede eliminar elementos de un maxmonticulo vacío.");
     } else {
         int auxpos, i = 0;
-        while (i <= mm->pos && mm->array[i] != elem) {
+        while (i <= mm->pos && !compararElemsIguales(mm->array[i], elem)) {
             i += 1;
         }
 
-        if (mm->array[i] != elem) {
+        if (i > mm->pos) {
             printf("\nError. El elemento no existe.");
         } else {
+            int mayor;
             auxpos = i;
             mm->array[auxpos] = mm->array[mm->pos];
             mm->pos -= 1;
 
-            while (
-                (mm->array[auxpos] < mm->array[hijoizq(auxpos)] ||
-             mm->array[auxpos] < mm->array[hijoder(auxpos)])
-             && hijoder(auxpos) <= mm->pos) {
-                if (mm->array[hijoizq(auxpos)] < mm->array[hijoder(auxpos)]) {
-                    swap(mm, auxpos, hijoder(auxpos));
-                    auxpos = hijoder(auxpos);
-                } else {
-                    swap(mm, auxpos, hijoizq(auxpos));
-                    auxpos = hijoizq(auxpos);
-                }
+            while ( hijoder(auxpos) <= mm->pos &&
+                (mm->array[auxpos].distancia < mm->array[hijoizq(auxpos)].distancia ||
+             mm->array[auxpos].distancia < mm->array[hijoder(auxpos)].distancia)) {
+                mayor = obtenerMayor(*mm, hijoizq(auxpos), hijoder(auxpos));
+                swap(mm, auxpos, mayor);
             }
         }
     }
@@ -145,4 +139,3 @@ void reemplazarRaiz(tipoMaxMonticulo* mm, tipoElementoMaxMonticulo elem) {
             swap(mm, auxpos, mayor);
     }
 }
-

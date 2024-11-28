@@ -12,6 +12,7 @@ typedef struct celdaC{
 typedef struct tipoC{
 	celdaCola* ini;
 	celdaCola* fin;
+	int cant;
 }tipoCola;
 
 void nuevaCola(tipoCola*);
@@ -24,4 +25,5 @@ void desencolar(tipoCola*);
 
 tipoElementoCola frente(tipoCola);
 
+int devolverCantidad(tipoCola);
 

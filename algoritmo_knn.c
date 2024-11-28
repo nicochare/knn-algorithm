@@ -27,7 +27,7 @@ bool algoritmo_knn(tipoMaxMonticulo* mm, int k) {
     }
 
     for (i = 0; i < k; i++) {
-        insertarMinMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
+        insertarMaxMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
     }
     free(arrayAux);
 
@@ -42,31 +42,4 @@ void interpretacion_resultado(bool resultado) {
     printf("\nLa predicción de la clase dice que el sujeto");
     if (!resultado) printf(" no");
     printf(" tiene diabetes\n");
-}
-
-// TODO: eliminar el elemento que se este comparando del minmonticulo y reagregarlo al final
-// TODO: seguir cambianndo para usar cola c en vez de minmonticulo mm
-void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
-    int nElem = 100000;
-    printf("Registros antes de aplicar ENN: %d\n", nElem);
-    int* borrados = NULL;
-    int nBorrados = 0;
-    for (int i = 0; i < 100000; i++) {
-        if (algoritmo_knn(mm, k) == mm->array[i].reg.diabetes) {
-            float distancia = mm->array[i].distancia;
-            Registro reg = mm->array[i].reg;
-            insertarMinMonticulo(mm_limpio, reg, distancia);
-        } else {
-            nBorrados++;
-            borrados = (int*)realloc(borrados, nBorrados * sizeof(int));
-            borrados[nBorrados - 1] = i;
-        }
-    }
-    for (int i = 0; i < nBorrados; i++) {
-        eliminarElementoIndice(mm, borrados[i]);
-    }
-
-    free(borrados);
-    nElem -= nBorrados;
-    printf("Registros despues de aplicar ENN: %d\n", nElem);
 }

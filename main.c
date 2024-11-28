@@ -1,5 +1,6 @@
 #include "procesamiento_datos.h"
 #include <math.h>
+#include <stdlib.h>
 #include <stdio.h>
 #define TAMANIODATASET 100000
 #define RUTA "diabetes_prediction_dataset.csv"
@@ -12,6 +13,51 @@ int obtener_k() {
     }
     return k;
 }
+
+// TODO: eliminar el elemento que se este comparando del maxmon y reagregarlo al final
+// TODO: NECESARIO ver la forma de mantener el 
+//       elemento X en cola hasta el final del analisis y luego borrar ese en especifico.
+
+void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
+    int nElem = devolverCantidad(*c);
+    int* borrados = NULL;
+    int nBorrados = 0;
+    Registro reg_buscado;
+    tipoMaxMonticulo mm;
+    
+    nuevoMaxMonticulo(&mm, k);
+
+    printf("\nRegistros antes de aplicar ENN: %d\n", nElem);
+    for (int i = 0; i < nElem; i++) {
+        for (int j = 0; j < k; j++) {
+
+            // Tomo primer elemento, lo borro, hago el MM 
+            // y lo vuelvo a agregar
+            reg_buscado = frente(*c);
+            desencolar(c);
+            cargar_datos(c, &mm, reg_buscado, k);
+            encolar(c, reg_buscado);
+
+            if (algoritmo_knn(&mm, k) == mm.array[i].reg.diabetes) {
+                float distancia = mm.array[i].distancia;
+                Registro reg = mm.array[i].reg;
+                insertarMaxMonticulo(mm_limpio, reg, distancia);
+            } else {
+                nBorrados++;
+                borrados = (int*)realloc(borrados, nBorrados * sizeof(int));
+                borrados[nBorrados - 1] = i;
+            }
+        }
+    }
+    for (int i = 0; i < nBorrados; i++) {
+        eliminarElementoIndice(mm, borrados[i]);
+    }
+
+    free(borrados);
+    nElem -= nBorrados;
+    printf("Registros despues de aplicar ENN: %d\n", nElem);
+}
+
 
 int main() {
     Registro* conjuntoDeEjemplos = (Registro*)malloc(5*sizeof(Registro));
@@ -55,7 +101,7 @@ int main() {
         normalizar_registro(&reg_buscado);
 
         cargar_datos(&dataset, &mm, reg_buscado);
-        resultado = algoritmo_knn(&conjuntoDeEjemplos, 1);
+        resultado = algoritmo_knn(&mm, 1);
         interpretacion_resultado(resultado);
         i++;
     }
@@ -78,7 +124,7 @@ int main() {
     normalizar_registro(&reg_buscado);    
     
     cargar_datos(&dataset, &mm, reg_buscado);
-    bool resultado = algoritmo_knn(&mm, k);
+    resultado = algoritmo_knn(&mm, k);
     interpretacion_resultado(resultado);
 
     // TODO: Apartado 7
@@ -92,7 +138,7 @@ int main() {
         normalizar_registro(&reg_buscado);
 
         cargar_datos(&dataset, &mm, reg_buscado);
-        resultado = algoritmo_knn(&conjuntoDeEjemplos, 1);
+        resultado = algoritmo_knn(&mm, 1);
         interpretacion_resultado(resultado);
         i++;
     }

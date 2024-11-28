@@ -1,3 +1,4 @@
+#pragma once
 #include "algoritmo_knn.h"
 #include "cola_registros.h"
 

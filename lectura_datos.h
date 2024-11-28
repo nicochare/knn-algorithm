@@ -1,3 +1,4 @@
+#pragma once
 #include <stdio.h>
 
 FILE* abrir_archivo(char*);

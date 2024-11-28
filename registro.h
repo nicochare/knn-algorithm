@@ -1,5 +1,4 @@
-#ifndef REGISTRO_H
-#define REGISTRO_H
+#pragma once
 
 typedef struct registro {
     float gender; // 0 = Hombre, 1 = Mujer
@@ -28,4 +27,3 @@ void mostrar_registro_distancia(Registro, float);
 Registro obtener_registro_buscado();
 
 Registro new_registro(float, float, float, float, float, float, float, float);
-#endif

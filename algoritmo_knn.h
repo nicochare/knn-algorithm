@@ -1,3 +1,4 @@
+#pragma once
 #include "max_monticulo.h"
 #include "cola_registros.h"
 

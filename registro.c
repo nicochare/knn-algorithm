@@ -174,4 +174,5 @@ Registro new_registro(float gender, float age, float hypertension, float heart_d
     reg.bmi = bmi;
     reg.HbA1c_level = HbA1c_level;
     reg.blood_glucose_level = blood_glucose_level;
+    return reg;
 }

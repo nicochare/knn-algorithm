@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAX_MONTICULO_H
+#define MAX_MONTICULO_H
 #include <stdbool.h>
 #include "registro.h"
 
@@ -32,3 +33,5 @@ bool esVacio(tipoMaxMonticulo);
 bool estaLleno(tipoMaxMonticulo);
 
 void reemplazarRaiz(tipoMaxMonticulo*, tipoElementoMaxMonticulo);
+
+#endif

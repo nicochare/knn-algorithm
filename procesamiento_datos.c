@@ -20,7 +20,6 @@ void cargar_en_cola(char* ruta, tipoCola* c) {
 void cargar_datos(tipoCola* c, tipoMaxMonticulo* mm, Registro reg_buscado, int k) {
     float distancia = 0;
     int i = 0;
-    char* linea_leida;
     tipoElementoMaxMonticulo elem;
     Registro reg;
     tipoCola c2;
@@ -53,7 +52,6 @@ void cargar_datos(tipoCola* c, tipoMaxMonticulo* mm, Registro reg_buscado, int k
 }
 
 void normalizar_dataset(tipoCola* c) {
-    char* linea_leida;
     int i = 0;
     Registro reg;
     Registro* array = (Registro*)malloc(10*sizeof(Registro));
@@ -70,6 +68,8 @@ void normalizar_dataset(tipoCola* c) {
         // Solo guardar y mostrar los 10 primeros para mostrar de ejemplo
         if (i < 10) {
             mostrar_registro(reg);
+            normalizar_registro(&reg);
+            printf("\n");
             array[i] = reg;
             i++;
         }
@@ -81,6 +81,7 @@ void normalizar_dataset(tipoCola* c) {
     printf("\nDATOS NORMALIZADOS\n");
     for (int j = 0; j < i; j++) {
         mostrar_registro(array[j]);
+        printf("\n");
     }
 
     free(array);

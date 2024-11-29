@@ -14,7 +14,7 @@ int obtener_k() {
     return k;
 }
 
-// TODO: eliminar el elemento que se este comparando del maxmon y reagregarlo al final
+// TODO: NECESARIO eliminar el elemento que se este comparando del maxmon y reagregarlo al final
 // TODO: NECESARIO ver la forma de mantener el 
 //       elemento X en cola hasta el final del analisis y luego borrar ese en especifico.
 
@@ -27,15 +27,15 @@ void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
     
     nuevoMaxMonticulo(&mm, k);
 
-    printf("\nRegistros antes de aplicar ENN: %d\n", nElem);
+    printf("\nN° registros antes de aplicar ENN: %d\n", nElem);
     for (int i = 0; i < nElem; i++) {
         for (int j = 0; j < k; j++) {
 
             // Tomo primer elemento, lo borro, hago el MM 
-            // y lo vuelvo a agregar
             reg_buscado = frente(*c);
             desencolar(c);
             cargar_datos(c, &mm, reg_buscado, k);
+            // y lo vuelvo a agregar (queda al final)
             encolar(c, reg_buscado);
 
             if (algoritmo_knn(&mm, k) == mm.array[i].reg.diabetes) {
@@ -49,32 +49,37 @@ void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
             }
         }
     }
-    for (int i = 0; i < nBorrados; i++) {
-        eliminarElementoIndice(mm, borrados[i]);
-    }
+
+    // TODO: Hace falta hacer esto? creo que se puede borrar total nos importa el n° de elementos borrados nomas, no realmente borrarlos
+            // Lo dejo comentado abajo x las dudas, de ultima descomentamos
+    // TODO: También se puede borrar la variable int* borrados si no los borramos de la cola
+    
+    // for (int i = 0; i < nBorrados; i++) {
+        // funcion que borra el elemento borrados[i] de la cola "tipoCola* c"
+    // }
 
     free(borrados);
     nElem -= nBorrados;
-    printf("Registros despues de aplicar ENN: %d\n", nElem);
+    printf("N° registros después de aplicar ENN: %d\n", nElem);
 }
 
 
 int main() {
     Registro* conjuntoDeEjemplos = (Registro*)malloc(5*sizeof(Registro));
     
-    // TODO: Apartado 1
+    // Apartado 1
     tipoCola dataset;
     nuevaCola(&dataset);
     cargar_en_cola(RUTA, &dataset);
 
-    // TODO: Apartado 2
+    // Apartado 2
     normalizar_dataset(&dataset);
 
-    // TODO: Apartado 3
+    // Apartado 3
     tipoMaxMonticulo mm;
     nuevoMaxMonticulo(&mm, TAMANIODATASET);
 
-    // TODO: Apartado 4
+    // Apartado 4
     printf("\n\nClasificación de un ejemplo nuevo mediante K-NN para K=1\n");
     printf("Se utilizará un ejemplo de paciente con los siguientes datos:\n");
     printf("    - Genero:              Hombre\n");
@@ -87,12 +92,13 @@ int main() {
     printf("    - Niveles Glucosa:     149\n\n");
     
     Registro reg_buscado = new_registro(0.0, 37.0, 0.0, 0.0, 6.0, 25.72, 3.5, 149.0);
+    int k = 1;
     normalizar_registro(&reg_buscado);
-    cargar_datos(&dataset, &mm, reg_buscado);
-    bool resultado = algoritmo_knn(&mm, 1);
+    cargar_datos(&dataset, &mm, reg_buscado, k);
+    bool resultado = algoritmo_knn(&mm, k);
     interpretacion_resultado(resultado);
 
-    // TODO: Apartado 5
+    // Apartado 5
     printf("\n\nClasificación de un conjunto de ejemplos mediante K-NN para K=1\n");
     
     int i = 0;
@@ -100,13 +106,13 @@ int main() {
         reg_buscado = conjuntoDeEjemplos[i];
         normalizar_registro(&reg_buscado);
 
-        cargar_datos(&dataset, &mm, reg_buscado);
-        resultado = algoritmo_knn(&mm, 1);
+        cargar_datos(&dataset, &mm, reg_buscado, k);
+        resultado = algoritmo_knn(&mm, k);
         interpretacion_resultado(resultado);
         i++;
     }
 
-    // TODO: Apartado 6
+    // Apartado 6
     printf("\n\nClasificación de un ejemplo nuevo mediante K-NN para K=k\n");
     printf("Se utilizará un ejemplo de paciente con los siguientes datos:\n");
     printf("    - Genero:              Hombre\n");
@@ -118,16 +124,16 @@ int main() {
     printf("    - Niveles HbA1c:       3.5\n");
     printf("    - Niveles Glucosa:     149\n\n");
     
-    int k = obtener_k();
+    k = obtener_k();
     
     reg_buscado = new_registro(0.0, 37.0, 0.0, 0.0, 6.0, 25.72, 3.5, 149.0);
     normalizar_registro(&reg_buscado);    
     
-    cargar_datos(&dataset, &mm, reg_buscado);
+    cargar_datos(&dataset, &mm, reg_buscado, k);
     resultado = algoritmo_knn(&mm, k);
     interpretacion_resultado(resultado);
 
-    // TODO: Apartado 7
+    // Apartado 7
     printf("\n\nClasificación de un conjunto de ejemplos mediante K-NN para K=k\n");
     
     k = obtener_k();
@@ -137,13 +143,13 @@ int main() {
         reg_buscado = conjuntoDeEjemplos[i];
         normalizar_registro(&reg_buscado);
 
-        cargar_datos(&dataset, &mm, reg_buscado);
+        cargar_datos(&dataset, &mm, reg_buscado, k);
         resultado = algoritmo_knn(&mm, 1);
         interpretacion_resultado(resultado);
         i++;
     }
 
-    // TODO: Apartado 8
+    // Apartado 8
     
     
     return 0;

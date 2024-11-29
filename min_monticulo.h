@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MIN_MONTICULO_H
+#define MIN_MONTICULO_H
 #include <stdbool.h>
 #include "registro.h"
 
@@ -30,3 +31,5 @@ void mostrarAnchura(tipoMinMonticulo);
 bool esVacio(tipoMinMonticulo);
 
 bool estaLleno(tipoMinMonticulo);
+
+#endif

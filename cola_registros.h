@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COLA_REGISTROS_H
+#define COLA_REGISTROS_H
 #include <stdbool.h>
 #include "registro.h"
 
@@ -27,3 +28,4 @@ tipoElementoCola frente(tipoCola);
 
 int devolverCantidad(tipoCola);
 
+#endif

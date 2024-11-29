@@ -66,6 +66,10 @@ void eliminarElementoIndice(tipoMaxMonticulo* mm, int pos) {
 	eliminarElemento(mm, mm->array[pos]);
 }
 
+int obtenerMayor(tipoMaxMonticulo mm, int pos1, int pos2) {
+    return (mm.array[pos1].distancia>mm.array[pos2].distancia ? pos1 : pos2);
+}
+
 void eliminarElemento(tipoMaxMonticulo* mm, tipoElementoMaxMonticulo elem) {
     if (esVacio(*mm)) {
         printf("\nError. No se puede eliminar elementos de un maxmonticulo vacío.");
@@ -112,7 +116,7 @@ tipoElementoMaxMonticulo devolverRaiz(tipoMaxMonticulo mm) {
 
 void mostrarAnchura(tipoMaxMonticulo mm) {
     for (int i = 0; i <= mm.pos; i++) {
-        printf("%d ", mm.array[i]);
+        printf("%f ", mm.array[i].distancia);
     }
 }
 
@@ -122,10 +126,6 @@ bool esVacio(tipoMaxMonticulo mm) {
 
 bool estaLleno(tipoMaxMonticulo mm) {
     return (mm.pos == mm.numEl-1);
-}
-
-int obtenerMayor(tipoMaxMonticulo mm, int pos1, int pos2) {
-    return (mm.array[pos1].distancia>mm.array[pos2].distancia ? pos1 : pos2);
 }
 
 void reemplazarRaiz(tipoMaxMonticulo* mm, tipoElementoMaxMonticulo elem) {

@@ -171,7 +171,6 @@ void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
         encolar(c, reg_buscado);
         
         if (algoritmo_knn(&mm, k) != reg_buscado.diabetes) {
-        } else {
             nBorrados++;
             borrados = (Registro*)realloc(borrados, nBorrados * sizeof(Registro));
             borrados[nBorrados - 1] = reg_buscado;

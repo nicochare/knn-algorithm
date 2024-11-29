@@ -87,3 +87,111 @@ void normalizar_dataset(tipoCola* c) {
     free(array);
     *c = c2;
 }
+
+Registro procesar_linea(char* linea_leida) {
+    Registro reg;
+    char* token = strtok(linea_leida, ",");
+    if (strcmp(token, "Male") == 0) {
+        reg.gender = 0;
+    }
+    else {
+        reg.gender = 1;
+    }
+
+    token = strtok(NULL, ",");
+    reg.age = atof(token);
+
+    token = strtok(NULL, ",");
+    reg.hypertension = atoi(token);
+
+    token = strtok(NULL, ",");
+    reg.heart_disease = atoi(token);
+
+    token = strtok(NULL, ",");
+
+    int smoking_history;
+
+    if (strcmp(token, "current") == 0) {
+        smoking_history = 1;
+    }
+    else if (strcmp(token, "former") == 0) {
+        smoking_history = 2;
+    }
+    else if (strcmp(token, "No info") == 0) {
+        smoking_history = 3;
+    }
+    else if (strcmp(token, "never") == 0) {
+        smoking_history = 4;
+    }
+    else if (strcmp(token, "not current") == 0) {
+        smoking_history = 5;
+    }
+    else {
+        smoking_history = 6;
+    }
+
+    reg.smoking_history = smoking_history;
+
+    token = strtok(NULL, ",");
+    reg.bmi = atof(token);
+
+    token = strtok(NULL, ",");
+    reg.HbA1c_level = atof(token);
+
+    token = strtok(NULL, ",");
+    reg.blood_glucose_level = atoi(token);
+
+    token = strtok(NULL, ",");
+    reg.diabetes = atoi(token);
+    token = strtok(NULL, ",");
+    return reg;
+}
+
+// TODO: NECESARIO eliminar el elemento que se este comparando del maxmon y reagregarlo al final
+// TODO: NECESARIO ver la forma de mantener el 
+//       elemento X en cola hasta el final del analisis y luego borrar ese en especifico.
+
+void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
+    int nElem = devolverCantidad(*c);
+    int* borrados = NULL;
+    int nBorrados = 0;
+    Registro reg_buscado;
+    tipoMaxMonticulo mm;
+    
+    nuevoMaxMonticulo(&mm, k);
+
+    printf("\nN° registros antes de aplicar ENN: %d\n", nElem);
+    for (int i = 0; i < nElem; i++) {
+        for (int j = 0; j < k; j++) {
+
+            // Tomo primer elemento, lo borro, hago el MM 
+            reg_buscado = frente(*c);
+            desencolar(c);
+            cargar_datos(c, &mm, reg_buscado, k);
+            // y lo vuelvo a agregar (queda al final)
+            encolar(c, reg_buscado);
+
+            if (algoritmo_knn(&mm, k) == mm.array[i].reg.diabetes) {
+                float distancia = mm.array[i].distancia;
+                Registro reg = mm.array[i].reg;
+                insertarMaxMonticulo(mm_limpio, reg, distancia);
+            } else {
+                nBorrados++;
+                borrados = (int*)realloc(borrados, nBorrados * sizeof(int));
+                borrados[nBorrados - 1] = i;
+            }
+        }
+    }
+
+    // TODO: Hace falta hacer esto? creo que se puede borrar total nos importa el n° de elementos borrados nomas, no realmente borrarlos
+            // Lo dejo comentado abajo x las dudas, de ultima descomentamos
+    // TODO: También se puede borrar la variable int* borrados si no los borramos de la cola
+    
+    // for (int i = 0; i < nBorrados; i++) {
+        // funcion que borra el elemento borrados[i] de la cola "tipoCola* c"
+    // }
+
+    free(borrados);
+    nElem -= nBorrados;
+    printf("N° registros después de aplicar ENN: %d\n", nElem);
+}

@@ -32,65 +32,6 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
             ));
 }
 
-Registro procesar_linea(char* linea_leida) {
-    Registro reg;
-    char* token = strtok(linea_leida, ",");
-    if (strcmp(token, "Male") == 0) {
-        reg.gender = 0;
-    }
-    else {
-        reg.gender = 1;
-    }
-
-    token = strtok(NULL, ",");
-    reg.age = atof(token);
-
-    token = strtok(NULL, ",");
-    reg.hypertension = atoi(token);
-
-    token = strtok(NULL, ",");
-    reg.heart_disease = atoi(token);
-
-    token = strtok(NULL, ",");
-
-    int smoking_history;
-
-    if (strcmp(token, "current") == 0) {
-        smoking_history = 1;
-    }
-    else if (strcmp(token, "former") == 0) {
-        smoking_history = 2;
-    }
-    else if (strcmp(token, "No info") == 0) {
-        smoking_history = 3;
-    }
-    else if (strcmp(token, "never") == 0) {
-        smoking_history = 4;
-    }
-    else if (strcmp(token, "not current") == 0) {
-        smoking_history = 5;
-    }
-    else {
-        smoking_history = 6;
-    }
-
-    reg.smoking_history = smoking_history;
-
-    token = strtok(NULL, ",");
-    reg.bmi = atof(token);
-
-    token = strtok(NULL, ",");
-    reg.HbA1c_level = atof(token);
-
-    token = strtok(NULL, ",");
-    reg.blood_glucose_level = atoi(token);
-
-    token = strtok(NULL, ",");
-    reg.diabetes = atoi(token);
-    token = strtok(NULL, ",");
-    return reg;
-}
-
 void mostrar_registro(Registro reg) {
     printf("genero: %-6.2f ", reg.gender);
     printf("edad: %-6.2f ", reg.age);
@@ -164,7 +105,7 @@ Registro obtener_registro_buscado() {
     return reg;
 }
 
-Registro new_registro(float gender, float age, float hypertension, float heart_disease, float smoking_history, float bmi, float HbA1c_level, float blood_glucose_level) {
+Registro nuevo_registro(float gender, float age, float hypertension, float heart_disease, float smoking_history, float bmi, float HbA1c_level, float blood_glucose_level) {
     Registro reg;
     reg.gender = gender;
     reg.age = age;

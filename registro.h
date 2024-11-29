@@ -19,14 +19,12 @@ void normalizar_registro(Registro*);
 
 float calcular_distancia_registros(Registro, Registro);
 
-Registro procesar_linea(char*);
-
 void mostrar_registro(Registro);
 
 void mostrar_registro_distancia(Registro, float);
 
 Registro obtener_registro_buscado();
 
-Registro new_registro(float, float, float, float, float, float, float, float);
+Registro nuevo_registro(float, float, float, float, float, float, float, float);
 
 #endif

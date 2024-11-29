@@ -101,7 +101,7 @@ void eliminarRaiz(tipoMaxMonticulo* mm) {
 	if (esVacio(*mm)) {
 		printf("\nError. No se puede eliminar la raiz de un maxmonticulo vacío.\n");
     } else {
-		eliminarElemento(mm, mm->array[0]);
+		eliminarElemento(mm, devolverRaiz(*mm));
     }
 }
 
@@ -137,5 +137,11 @@ void reemplazarRaiz(tipoMaxMonticulo* mm, tipoElementoMaxMonticulo elem) {
         mm->array[auxpos].distancia < mm->array[hijoder(auxpos)].distancia)) {
             mayor = obtenerMayor(*mm, hijoizq(auxpos), hijoder(auxpos));
             swap(mm, auxpos, mayor);
+    }
+}
+
+void vaciarMaxMonticulo(tipoMaxMonticulo* mm) {
+    while (!esVacio(*mm)) {
+        eliminarRaiz(mm);
     }
 }

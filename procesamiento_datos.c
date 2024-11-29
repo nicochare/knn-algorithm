@@ -153,7 +153,7 @@ Registro procesar_linea(char* linea_leida) {
 
 void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
     int nElem = devolverCantidad(*c);
-    int* borrados = NULL;
+    Registro* borrados = NULL;
     int nBorrados = 0;
     Registro reg_buscado;
     tipoMaxMonticulo mm;
@@ -162,34 +162,27 @@ void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
 
     printf("\nN° registros antes de aplicar ENN: %d\n", nElem);
     for (int i = 0; i < nElem; i++) {
-        for (int j = 0; j < k; j++) {
-
-            // Tomo primer elemento, lo borro, hago el MM 
-            reg_buscado = frente(*c);
-            desencolar(c);
-            cargar_datos(c, &mm, reg_buscado, k);
-            // y lo vuelvo a agregar (queda al final)
-            encolar(c, reg_buscado);
-
-            if (algoritmo_knn(&mm, k) == mm.array[i].reg.diabetes) {
-                float distancia = mm.array[i].distancia;
-                Registro reg = mm.array[i].reg;
-                insertarMaxMonticulo(mm_limpio, reg, distancia);
-            } else {
-                nBorrados++;
-                borrados = (int*)realloc(borrados, nBorrados * sizeof(int));
-                borrados[nBorrados - 1] = i;
-            }
+        vaciarMaxMonticulo(&mm);
+        // Tomo primer elemento, lo borro, hago el MM 
+        reg_buscado = frente(*c);
+        desencolar(c);
+        cargar_datos(c, &mm, reg_buscado, k);
+        // y lo vuelvo a agregar (queda al final)
+        encolar(c, reg_buscado);
+        
+        if (algoritmo_knn(&mm, k) != reg_buscado.diabetes) {
+        } else {
+            nBorrados++;
+            borrados = (Registro*)realloc(borrados, nBorrados * sizeof(Registro));
+            borrados[nBorrados - 1] = reg_buscado;
         }
     }
 
-    // TODO: Hace falta hacer esto? creo que se puede borrar total nos importa el n° de elementos borrados nomas, no realmente borrarlos
-            // Lo dejo comentado abajo x las dudas, de ultima descomentamos
-    // TODO: También se puede borrar la variable int* borrados si no los borramos de la cola
-    
-    // for (int i = 0; i < nBorrados; i++) {
-        // funcion que borra el elemento borrados[i] de la cola "tipoCola* c"
-    // }
+
+    for (int i = 0; i < nBorrados; i++) {
+        // TODO: Definir esto
+        borrarDeCola(c, borrados[i]);
+    }
 
     free(borrados);
     nElem -= nBorrados;

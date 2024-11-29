@@ -34,4 +34,6 @@ bool estaLleno(tipoMaxMonticulo);
 
 void reemplazarRaiz(tipoMaxMonticulo*, tipoElementoMaxMonticulo);
 
+void vaciarMaxMonticulo(tipoMaxMonticulo*);
+
 #endif

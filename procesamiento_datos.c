@@ -92,6 +92,17 @@ void normalizar_dataset(tipoCola* c) {
     *c = c2;
 }
 
+char* obtener_token(char* linea_leida) {
+    char* token = strtok(linea_leida, ",");
+    token = strtok(NULL, ",");
+    if (token == NULL) {
+        return NULL;
+    } else {
+        return token;
+
+    }
+}
+
 Registro procesar_linea(char* linea_leida) {
     Registro reg;
     char* token = strtok(linea_leida, ",");
@@ -102,16 +113,16 @@ Registro procesar_linea(char* linea_leida) {
         reg.gender = 1;
     }
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     reg.age = atof(token);
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     reg.hypertension = atoi(token);
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     reg.heart_disease = atoi(token);
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
 
     int smoking_history;
 
@@ -136,18 +147,18 @@ Registro procesar_linea(char* linea_leida) {
 
     reg.smoking_history = smoking_history;
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     reg.bmi = atof(token);
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     reg.HbA1c_level = atof(token);
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     reg.blood_glucose_level = atoi(token);
 
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     reg.diabetes = atoi(token);
-    token = strtok(NULL, ",");
+    token = obtener_token(linea_leida);
     return reg;
 }
 

@@ -7,6 +7,10 @@ void cargar_en_cola(char* ruta, tipoCola* c) {
     FILE* fichero = abrir_archivo(ruta);
     char* linea_leida;
     Registro reg;
+    
+    // Salto primera linea para no leer los nombres de las columnas
+    linea_leida = leer_linea(fichero);
+    free(linea_leida);
 
     while ((linea_leida = leer_linea(fichero)) != NULL) {
         reg = procesar_linea(linea_leida);
@@ -147,17 +151,13 @@ Registro procesar_linea(char* linea_leida) {
     return reg;
 }
 
-// TODO: NECESARIO eliminar el elemento que se este comparando del maxmon y reagregarlo al final
-// TODO: NECESARIO ver la forma de mantener el 
-//       elemento X en cola hasta el final del analisis y luego borrar ese en especifico.
-
-void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
-    int nElem = devolverCantidad(*c);
+void algoritmo_enn(tipoCola* c, int k) {
+    int nElem = devolverCantidadElementos(*c);
     int nBorrados = 0;
     Registro reg_buscado;
     tipoMaxMonticulo mm;
     tipoCola c2;
-    
+
     nuevaCola(&c2);
     nuevoMaxMonticulo(&mm, k);
 
@@ -176,12 +176,13 @@ void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
         } else {
             encolar(&c2, reg_buscado);
         }
+        printf("NBORRADOS: %d\n", nBorrados);
     }
 
     nElem -= nBorrados;
     printf("N° registros después de aplicar ENN: %d\n", nElem);
 
-    for (int i = 0; i < nElem; i++) {
+    for (int i = 0; i < devolverCantidadElementos(*c); i++) {
         desencolar(c);
     }
     

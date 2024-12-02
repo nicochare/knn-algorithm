@@ -5,6 +5,5 @@
 
 void interpretacion_resultado(bool);
 bool algoritmo_knn(tipoMaxMonticulo*, int);
-void algoritmo_enn(tipoCola*, int, tipoMaxMonticulo*);
 
 #endif

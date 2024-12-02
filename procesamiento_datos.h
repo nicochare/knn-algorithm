@@ -12,6 +12,6 @@ void cargar_en_cola(char*, tipoCola*);
 
 Registro procesar_linea(char*);
 
-void algoritmo_enn(tipoCola*, int, tipoMaxMonticulo*); 
+void algoritmo_enn(tipoCola*, int); 
 
 #endif

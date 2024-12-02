@@ -13,7 +13,8 @@ int obtener_k(int max) {
     }
     return k;
 }
-
+// TODO: Realizar pruebas con diferentes % de diabéticos, varios dataset, varias k
+// TODO: Graficas Python evolucion k y precision con diferentes %
 int main() {
     // Apartado 1
     tipoCola dataset;

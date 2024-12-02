@@ -92,73 +92,79 @@ void normalizar_dataset(tipoCola* c) {
     *c = c2;
 }
 
-char* obtener_token(char* linea_leida) {
-    char* token = strtok(linea_leida, ",");
-    token = strtok(NULL, ",");
-    if (token == NULL) {
-        return NULL;
-    } else {
-        return token;
-
-    }
-}
-
 Registro procesar_linea(char* linea_leida) {
     Registro reg;
     char* token = strtok(linea_leida, ",");
-    if (strcmp(token, "Male") == 0) {
-        reg.gender = 0;
-    }
-    else {
-        reg.gender = 1;
-    }
-
-    token = obtener_token(linea_leida);
-    reg.age = atof(token);
-
-    token = obtener_token(linea_leida);
-    reg.hypertension = atoi(token);
-
-    token = obtener_token(linea_leida);
-    reg.heart_disease = atoi(token);
-
-    token = obtener_token(linea_leida);
-
-    int smoking_history;
-
-    if (strcmp(token, "current") == 0) {
-        smoking_history = 1;
-    }
-    else if (strcmp(token, "former") == 0) {
-        smoking_history = 2;
-    }
-    else if (strcmp(token, "No info") == 0) {
-        smoking_history = 3;
-    }
-    else if (strcmp(token, "never") == 0) {
-        smoking_history = 4;
-    }
-    else if (strcmp(token, "not current") == 0) {
-        smoking_history = 5;
-    }
-    else {
-        smoking_history = 6;
+    if (token != NULL) {
+        if (strcmp(token, "Male") == 0) {
+            reg.gender = 0;
+        }
+        else {
+            reg.gender = 1;
+        }
     }
 
-    reg.smoking_history = smoking_history;
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        reg.age = atof(token);
+    }
 
-    token = obtener_token(linea_leida);
-    reg.bmi = atof(token);
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        reg.hypertension = atof(token);
+    }
 
-    token = obtener_token(linea_leida);
-    reg.HbA1c_level = atof(token);
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        reg.heart_disease = atof(token);
+    }
 
-    token = obtener_token(linea_leida);
-    reg.blood_glucose_level = atoi(token);
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        int smoking_history;
 
-    token = obtener_token(linea_leida);
-    reg.diabetes = atoi(token);
-    token = obtener_token(linea_leida);
+        if (strcmp(token, "current") == 0) {
+            smoking_history = 1;
+        }
+        else if (strcmp(token, "former") == 0) {
+            smoking_history = 2;
+        }
+        else if (strcmp(token, "No info") == 0) {
+            smoking_history = 3;
+        }
+        else if (strcmp(token, "never") == 0) {
+            smoking_history = 4;
+        }
+        else if (strcmp(token, "not current") == 0) {
+            smoking_history = 5;
+        }
+        else {
+            smoking_history = 6;
+        }
+
+        reg.smoking_history = smoking_history;
+    }
+
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        reg.bmi = atof(token);
+    }
+
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        reg.HbA1c_level = atof(token);
+    }
+
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        reg.blood_glucose_level = atof(token);
+    }
+
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        reg.diabetes = atof(token);
+    }
+
     return reg;
 }
 

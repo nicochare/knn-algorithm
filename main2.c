@@ -16,7 +16,8 @@ int main() {
     while((linea = leer_linea(dataset)) != NULL) {
         total++;
         reg = procesar_linea(linea);
-        printf("reg.diabetes: %f\n", reg.diabetes);
+        mostrar_registro(reg);
+        printf("\n");
 
         if (reg.diabetes == 1) {
             tiene += 1;

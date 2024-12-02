@@ -8,7 +8,7 @@
 int obtener_k() {
     int k = 0;
     while (k < 1 || k > TAMANIODATASET) {
-        printf("1 <= k <= %d", TAMANIODATASET);
+        printf("1 <= k <= %d\n", TAMANIODATASET);
         printf("Por favor, introduce el numero de registros con los que desea comparar (k): ");
         scanf("%d", &k);
     }

@@ -26,6 +26,6 @@ void desencolar(tipoCola*);
 
 tipoElementoCola frente(tipoCola);
 
-int devolverCantidad(tipoCola);
+int devolverCantidadElementos(tipoCola);
 
 #endif

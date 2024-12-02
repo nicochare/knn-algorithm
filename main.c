@@ -82,7 +82,7 @@ int main() {
     
     k = obtener_k();
     
-    Registro reg_buscado = nuevo_registro(0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
+    reg_buscado = nuevo_registro(0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
     normalizar_registro(&reg_buscado);    
     
     cargar_datos(&dataset, &mm, reg_buscado, k);
@@ -91,7 +91,6 @@ int main() {
 
     // Apartado 7
     printf("\n\nClasificación de un conjunto de ejemplos mediante K-NN para K=k\n");
-    Registro* conjuntoDeEjemplos = (Registro*)malloc(5*sizeof(Registro));
     conjuntoDeEjemplos[0] = nuevo_registro(0.0, 64.0, 0.0, 0.0, 5.0, 31.7, 6.2, 162.0); // no diabetes
     conjuntoDeEjemplos[1] = nuevo_registro(1.0, 36.0, 0.0, 0.0, 3.0, 55.91, 7.0, 151.1); // diabetes
     conjuntoDeEjemplos[2] = nuevo_registro(0.0, 39.0, 0.0, 0.0, 3.0, 27.98, 5.9, 284.1); // diabetes
@@ -112,7 +111,7 @@ int main() {
     }
 
     // Apartado 8
-        
+    
     
     return 0;
 }

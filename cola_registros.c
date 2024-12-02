@@ -56,6 +56,6 @@ tipoElementoCola frente(tipoCola c) {
     }
 }
 
-int devolverCantidad(tipoCola c) {
+int devolverCantidadElementos(tipoCola c) {
     return c.cant;
 }

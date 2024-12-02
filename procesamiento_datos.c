@@ -5,6 +5,7 @@
 
 void cargar_en_cola(char* ruta, tipoCola* c) {
     FILE* fichero = abrir_archivo(ruta);
+    float total = 0.0, tiene = 0.0, noTiene = 0.0;
     char* linea_leida;
     Registro reg;
     
@@ -13,11 +14,19 @@ void cargar_en_cola(char* ruta, tipoCola* c) {
     free(linea_leida);
 
     while ((linea_leida = leer_linea(fichero)) != NULL) {
+        total++;
+        if (reg.diabetes == 1) {
+            tiene += 1;
+        } else {
+            noTiene += 1;
+        }
         reg = procesar_linea(linea_leida);
         encolar(c, reg);
         free(linea_leida);
     }
+    desencolar(c);
 
+    printf("\nPorcentaje de personas con diabetes en el dataset: %.4f%%\n", (tiene/total)*100);
     cerrar_archivo(fichero);
 }
 
@@ -56,13 +65,14 @@ void cargar_datos(tipoCola* c, tipoMaxMonticulo* mm, Registro reg_buscado, int k
 }
 
 void normalizar_dataset(tipoCola* c) {
-    int i = 0;
+    int i = 0; 
+    int nEjemplos = 10;
     Registro reg;
     Registro* array = (Registro*)malloc(10*sizeof(Registro));
     tipoCola c2;
     nuevaCola(&c2);
 
-    printf("\nEjemplo de normalización de datos con los primeros 20 registros del dataset.\n");
+    printf("\nEjemplo de normalización de datos con los primeros %d registros del dataset.\n", nEjemplos);
     
     printf("\nDATOS NO NORMALIZADOS\n");
     while (!esNulaCola(*c)) {
@@ -70,7 +80,7 @@ void normalizar_dataset(tipoCola* c) {
         desencolar(c);
 
         // Solo guardar y mostrar los 10 primeros para mostrar de ejemplo
-        if (i < 10) {
+        if (i < nEjemplos) {
             mostrar_registro(reg);
             normalizar_registro(&reg);
             printf("\n");
@@ -98,8 +108,7 @@ Registro procesar_linea(char* linea_leida) {
     if (token != NULL) {
         if (strcmp(token, "Male") == 0) {
             reg.gender = 0;
-        }
-        else {
+        } else {
             reg.gender = 1;
         }
     }
@@ -193,7 +202,6 @@ void algoritmo_enn(tipoCola* c, int k) {
         } else {
             encolar(&c2, reg_buscado);
         }
-        printf("NBORRADOS: %d\n", nBorrados);
     }
 
     nElem -= nBorrados;

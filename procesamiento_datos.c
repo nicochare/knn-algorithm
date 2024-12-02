@@ -153,11 +153,12 @@ Registro procesar_linea(char* linea_leida) {
 
 void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
     int nElem = devolverCantidad(*c);
-    Registro* borrados = NULL;
     int nBorrados = 0;
     Registro reg_buscado;
     tipoMaxMonticulo mm;
+    tipoCola c2;
     
+    nuevaCola(&c2);
     nuevoMaxMonticulo(&mm, k);
 
     printf("\nN° registros antes de aplicar ENN: %d\n", nElem);
@@ -172,18 +173,17 @@ void algoritmo_enn(tipoCola* c, int k, tipoMaxMonticulo* mm_limpio) {
         
         if (algoritmo_knn(&mm, k) != reg_buscado.diabetes) {
             nBorrados++;
-            borrados = (Registro*)realloc(borrados, nBorrados * sizeof(Registro));
-            borrados[nBorrados - 1] = reg_buscado;
+        } else {
+            encolar(&c2, reg_buscado);
         }
     }
 
-
-    for (int i = 0; i < nBorrados; i++) {
-        // TODO: Definir esto
-        borrarDeCola(c, borrados[i]);
-    }
-
-    free(borrados);
     nElem -= nBorrados;
     printf("N° registros después de aplicar ENN: %d\n", nElem);
+
+    for (int i = 0; i < nElem; i++) {
+        desencolar(c);
+    }
+    
+    *c = c2;
 }

@@ -7,7 +7,7 @@
 int obtener_k(int max) {
     int k = 0;
     while (k < 1) {
-        printf("(1 <= k <= %d\n", max);
+        printf("(1 <= k <= %d)\n", max);
         printf("\nPor favor, introduce el numero de registros con los que desea comparar (k): ");
         scanf("%d", &k);
     }

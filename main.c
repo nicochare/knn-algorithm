@@ -111,7 +111,7 @@ int main() {
 
     // Apartado 8
     printf("Pre-procesamiento del dataset mediante Algoritmo de Wilson (ENN)\n");
-    k = obtener_k();
+    k = obtener_k(devolverCantidadElementos(dataset));
     algoritmo_enn(&dataset, k);
     
     // Apartado 6
@@ -127,7 +127,7 @@ int main() {
     printf("    - Niveles HbA1c:       7.4\n");
     printf("    - Niveles Glucosa:     162\n\n");
     
-    k = obtener_k();
+    k = obtener_k(devolverCantidadElementos(dataset));
     
     reg_buscado = nuevo_registro(0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
     normalizar_registro(&reg_buscado);    
@@ -144,7 +144,7 @@ int main() {
     conjuntoDeEjemplos[3] = nuevo_registro(1.0, 53.0, 0.0, 0.0, 4.0, 26.81, 6.7, 158.0); // no diabetes
     conjuntoDeEjemplos[4] = nuevo_registro(1.0, 10.0, 0.0, 0.0, 3.0, 28.86, 6.1, 93.0); // no diabetes
 
-    k = obtener_k();
+    k = obtener_k(devolverCantidadElementos(dataset));
     
     i = 0;
     while (i < 5) {

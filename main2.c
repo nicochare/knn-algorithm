@@ -59,7 +59,7 @@ int main() {
     
 
     printf("---RUTA: %s---\n", rutas[0]);
-    for (int i = 1; i <= 100; i++) {
+    for (int i = 1; i <= 667; i++) {
         pruebaCompleta(rutas[0], i);
     }
     printf("\n");

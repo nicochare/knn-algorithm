@@ -43,7 +43,7 @@ int main() {
     printf("    - Niveles HbA1c:       7.4\n");
     printf("    - Niveles Glucosa:     162\n\n");
     
-    Registro reg_buscado = nuevo_registro(0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
+    Registro reg_buscado = nuevo_registro(-1, 0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
     normalizar_registro(&reg_buscado);
     cargar_datos(&dataset, &mm, reg_buscado, 1);
     bool resultado = algoritmo_knn(&mm, 1);
@@ -79,7 +79,7 @@ int main() {
     printf("    - Niveles HbA1c:       7.4\n");
     printf("    - Niveles Glucosa:     162\n\n");
     
-    reg_buscado = nuevo_registro(0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
+    reg_buscado = nuevo_registro(-1, 0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
     normalizar_registro(&reg_buscado);    
     
     cargar_datos(&dataset, &mm, reg_buscado, k);

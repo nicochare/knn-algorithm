@@ -5,6 +5,7 @@
 
 bool algoritmo_knn(tipoMaxMonticulo* mm, int k) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
+    float distancia;
     tipoElementoMaxMonticulo* arrayAux = (tipoElementoMaxMonticulo*)malloc(k * sizeof(tipoElementoMaxMonticulo));
 
     if (arrayAux == NULL) {
@@ -26,6 +27,8 @@ bool algoritmo_knn(tipoMaxMonticulo* mm, int k) {
         i++;
     }
 
+    distancia = raiz.distancia;
+    
     for (i = 0; i < k; i++) {
         insertarMaxMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
     }

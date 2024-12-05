@@ -4,6 +4,8 @@
 #include "cola_registros.h"
 #include "registro.h"
 
+float mostrar_porcentaje(char* ruta);
+
 void cargar_datos(tipoCola*, tipoMaxMonticulo*, Registro, int);
 
 void normalizar_dataset(tipoCola*);

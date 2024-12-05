@@ -19,6 +19,7 @@ int main() {
     // Apartado 1
     tipoCola dataset;
     nuevaCola(&dataset);
+    mostrar_porcentaje(RUTA);
     cargar_en_cola(RUTA, &dataset);
 
     int k = obtener_k(devolverCantidadElementos(dataset));

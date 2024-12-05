@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void cargar_en_cola(char* ruta, tipoCola* c) {
+float mostrar_porcentaje(char* ruta) {
     FILE* fichero = abrir_archivo(ruta);
     float total = 0.0, tiene = 0.0, noTiene = 0.0;
     char* linea_leida;
@@ -15,18 +15,35 @@ void cargar_en_cola(char* ruta, tipoCola* c) {
 
     while ((linea_leida = leer_linea(fichero)) != NULL) {
         total++;
+        reg = procesar_linea(linea_leida);
         if (reg.diabetes == 1) {
             tiene += 1;
         } else {
             noTiene += 1;
         }
+        free(linea_leida);
+    }
+
+    printf("Porcentaje de personas con diabetes en el dataset: %.4f%%\n", (tiene/total)*100);
+    cerrar_archivo(fichero);
+}
+
+void cargar_en_cola(char* ruta, tipoCola* c) {
+    FILE* fichero = abrir_archivo(ruta);
+    char* linea_leida;
+    Registro reg;
+    
+    // Salto primera linea para no leer los nombres de las columnas
+    linea_leida = leer_linea(fichero);
+    free(linea_leida);
+
+    while ((linea_leida = leer_linea(fichero)) != NULL) {
         reg = procesar_linea(linea_leida);
         encolar(c, reg);
         free(linea_leida);
     }
     desencolar(c);
 
-    printf("Porcentaje de personas con diabetes en el dataset: %.4f%%\n", (tiene/total)*100);
     cerrar_archivo(fichero);
 }
 

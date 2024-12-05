@@ -108,8 +108,10 @@ Registro procesar_linea(char* linea_leida) {
     if (token != NULL) {
         if (strcmp(token, "Male") == 0) {
             reg.gender = 0;
-        } else {
+        } else if (strcmp(token, "Female") == 0) {
             reg.gender = 1;
+        } else {
+            reg.gender = 2;
         }
     }
 

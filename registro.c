@@ -62,9 +62,9 @@ Registro obtener_registro_buscado() {
     printf("Por favor, introduce los datos del registro a analizar:");
     
     do {
-        printf("\n    - Genero (0: Hombre, 1: Mujer): ");
+        printf("\n    - Genero (0: Hombre, 1: Mujer, 2: Otros): ");
         scanf("%f", &reg.gender);
-    } while (reg.gender < 0 || reg.gender > 1);
+    } while (reg.gender < 0 || reg.gender > 2);
     
     do {
         printf("\n    - Edad: ");

@@ -33,7 +33,7 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
 }
 
 void mostrar_registro(Registro reg) {
-    printf("n° registro: %-6.2f ", reg.gender);
+    printf("n° registro: %-6.2f ", reg.num_registro);
     printf("genero: %-6.2f ", reg.gender);
     printf("edad: %-6.2f ", reg.age);
     printf("hipertension: %-6.2f ", reg.hypertension);

@@ -26,6 +26,6 @@ void mostrar_registro_distancia(Registro, float);
 
 Registro obtener_registro_buscado();
 
-Registro nuevo_registro(float, float, float, float, float, float, float, float);
+Registro nuevo_registro(int, float, float, float, float, float, float, float, float);
 
 #endif

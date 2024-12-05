@@ -5,7 +5,7 @@
 FILE* abrir_archivo(char* ruta) {
     FILE* fichero = NULL;
 
-    if ((fichero = fopen(ruta, "r")) == NULL) {
+    if ((fichero = fopen("datasets/"+ruta, "r")) == NULL) {
         printf("\nError de apertura de archivo.\n");
         exit(-1);
     }

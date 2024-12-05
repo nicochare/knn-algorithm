@@ -2,6 +2,7 @@
 #define REGISTRO_H
 
 typedef struct registro {
+    int num_registro;
     float gender; // 0 = Hombre, 1 = Mujer
     float age;
     float hypertension;

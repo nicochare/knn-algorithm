@@ -33,6 +33,7 @@ float calcular_distancia_registros(Registro r1, Registro r2) {
 }
 
 void mostrar_registro(Registro reg) {
+    printf("n° registro: %-6.2f ", reg.gender);
     printf("genero: %-6.2f ", reg.gender);
     printf("edad: %-6.2f ", reg.age);
     printf("hipertension: %-6.2f ", reg.hypertension);
@@ -45,6 +46,7 @@ void mostrar_registro(Registro reg) {
 }
 
 void mostrar_registro_distancia(Registro reg, float distancia) {
+    printf("n° registro: %-6.2f ", reg.num_registro);
     printf("genero: %-6.2f ", reg.gender);
     printf("edad: %-6.2f ", reg.age);
     printf("hipertension: %-6.2f ", reg.hypertension);
@@ -105,8 +107,9 @@ Registro obtener_registro_buscado() {
     return reg;
 }
 
-Registro nuevo_registro(float gender, float age, float hypertension, float heart_disease, float smoking_history, float bmi, float HbA1c_level, float blood_glucose_level) {
+Registro nuevo_registro(int num_registro, float gender, float age, float hypertension, float heart_disease, float smoking_history, float bmi, float HbA1c_level, float blood_glucose_level) {
     Registro reg;
+    reg.num_registro = num_registro;
     reg.gender = gender;
     reg.age = age;
     reg.hypertension = hypertension;

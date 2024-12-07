@@ -207,7 +207,6 @@ void algoritmo_enn(tipoCola* c, int k) {
     nuevaCola(&c2);
     nuevoMaxMonticulo(&mm, k);
 
-    printf("N° registros antes de aplicar ENN: %d\n", nElem);
     for (int i = 0; i < nElem; i++) {
         vaciarMaxMonticulo(&mm);
         // Tomo primer elemento, lo borro, hago el MM 
@@ -223,8 +222,7 @@ void algoritmo_enn(tipoCola* c, int k) {
             encolar(&c2, reg_buscado);
         }
     }
-    nElem -= nBorrados;
-    printf("N° registros después de aplicar ENN: %d\n", nElem);
+    
     for (int i = 0; i < devolverCantidadElementos(*c); i++) {
         desencolar(c);
     }
@@ -258,7 +256,7 @@ void evolucion_acierto(char* RUTA, int k) {
         }
     }
     float porcentaje = (float)(aciertos / nElem) * 100.0; 
-    printf("Accuracy for K=%d = %f\n\n", k, porcentaje);
+    printf("PRE-ENN: Accuracy for K=%d = %f\n", k, porcentaje);
 
     algoritmo_enn(&dataset, k);
 
@@ -278,5 +276,5 @@ void evolucion_acierto(char* RUTA, int k) {
         }
     }
     porcentaje = (float)(aciertos / nElem) * 100.0; 
-    printf("Accuracy for K=%d = %f\n\n", k, porcentaje);
+    printf("POST-ENN: Accuracy for K=%d = %f\n\n", k, porcentaje);
 }

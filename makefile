@@ -27,5 +27,6 @@ main: main.c lectura_datos.o algoritmo_knn.o procesamiento_datos.o max_monticulo
 # TODO: Borrar esto
 main2:
 	gcc $(PARAMS) main2.c -o main2.o algoritmo_knn.o lectura_datos.o procesamiento_datos.o max_monticulo.o cola_registros.o registro.o -lm
+
 clean:
 	rm -rf *.o

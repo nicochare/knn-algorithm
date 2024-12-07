@@ -101,11 +101,16 @@ int main() {
 
     // Apartado 8
     printf("\n\n\033[33m --- APARTADO 8: Pre-procesamiento del dataset mediante Algoritmo de Wilson (ENN) para K = %d\033[0m\n", k);
+    
+    printf("N° registros antes de aplicar ENN: %d\n", devolverCantidadElementos(dataset));
+    
     algoritmo_enn(&dataset, k);
+    
+    printf("N° registros después de aplicar ENN: %d\n", devolverCantidadElementos(dataset));
     
     // Apartado 9
     printf("\n\n\033[33m --- APARTADO 9: Evolución de la precisión de acierto en función del número de ejemplos y la K\033[0m\n");
-    for (int i = 0; i < 10; i++) {
+    for (int i = 1; i <= 37; i++) {
         evolucion_acierto(RUTA, i);
     }
 

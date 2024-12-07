@@ -110,7 +110,7 @@ int main() {
     
     // Apartado 9
     printf("\n\n\033[33m --- APARTADO 9: Evolución de la precisión de acierto en función del número de ejemplos y la K\033[0m\n");
-    // Ejecucion hasta K = 667 debido a que desde K = 668 en adelante se obtiene el mismo resultado contínuamente
+    // Ejecucion hasta K = 667 debido a que desde K = 668 en adelante no hay impacto en la precisión del algoritmo
     for (int i = 1; i <= 667; i++) {
         evolucion_acierto(RUTA, i);
     }

@@ -55,7 +55,7 @@ int main() {
     char* ruta = "diabetes_prediction_dataset2.csv";
     
 
-    printf("---RUTA: %s---\n", ruta[0]);
+    printf("---RUTA: %s---\n", ruta);
     for (int i = 1; i <= 667; i++) {
         pruebaCompleta(ruta, i);
     }

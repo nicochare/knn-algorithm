@@ -46,8 +46,7 @@ int main() {
     Registro reg_buscado = nuevo_registro(-1, 0.0, 81.0, 1.0, 1.0, 5.0, 26.92, 7.4, 162.0); // diabetes
     normalizar_registro(&reg_buscado);
     cargar_datos(&dataset, &mm, reg_buscado, 1);
-    bool resultado = algoritmo_knn(&mm, 1);
-    interpretacion_resultado(resultado);
+    algoritmo_knn(&mm, 1, true, true);
 
     // Apartado 5
     printf("\n\n\033[33m --- APARTADO 5: Clasificación de un conjunto de ejemplos mediante K-NN para K=1\033[0m\n");
@@ -62,8 +61,7 @@ int main() {
         normalizar_registro(&reg_buscado);
 
         cargar_datos(&dataset, &mm, reg_buscado, 1);
-        resultado = algoritmo_knn(&mm, 1);
-        interpretacion_resultado(resultado);
+        algoritmo_knn(&mm, 1, reg_buscado.diabetes, true);
         desencolar(&dataset_ejemplos);
     }
 
@@ -83,8 +81,7 @@ int main() {
     normalizar_registro(&reg_buscado);    
     
     cargar_datos(&dataset, &mm, reg_buscado, k);
-    resultado = algoritmo_knn(&mm, k);
-    interpretacion_resultado(resultado);
+    algoritmo_knn(&mm, k, true, true);
 
     // Apartado 7
     printf("\n\n\033[33m --- APARTADO 7: Clasificación de un conjunto de ejemplos mediante K-NN para K=k\033[0m\n");
@@ -97,8 +94,7 @@ int main() {
         normalizar_registro(&reg_buscado);
 
         cargar_datos(&dataset, &mm, reg_buscado, k);
-        resultado = algoritmo_knn(&mm, 1);
-        interpretacion_resultado(resultado);
+        algoritmo_knn(&mm, 1, reg_buscado.diabetes, true);
         desencolar(&dataset_ejemplos);
     }
 

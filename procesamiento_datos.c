@@ -15,7 +15,7 @@ float mostrar_porcentaje(char* ruta) {
 
     while ((linea_leida = leer_linea(fichero)) != NULL) {
         total++;
-        reg = procesar_linea(linea_leida);
+        reg = procesar_linea(linea_leida, 1);
         if (reg.diabetes == 1) {
             tiene += 1;
         } else {
@@ -30,6 +30,7 @@ float mostrar_porcentaje(char* ruta) {
 
 void cargar_en_cola(char* ruta, tipoCola* c) {
     FILE* fichero = abrir_archivo(ruta);
+    int i = 1;
     char* linea_leida;
     Registro reg;
     
@@ -38,7 +39,8 @@ void cargar_en_cola(char* ruta, tipoCola* c) {
     free(linea_leida);
 
     while ((linea_leida = leer_linea(fichero)) != NULL) {
-        reg = procesar_linea(linea_leida);
+        reg = procesar_linea(linea_leida, i);
+        i++;
         encolar(c, reg);
         free(linea_leida);
     }
@@ -119,8 +121,9 @@ void normalizar_dataset(tipoCola* c) {
     *c = c2;
 }
 
-Registro procesar_linea(char* linea_leida) {
+Registro procesar_linea(char* linea_leida, int i) {
     Registro reg;
+    reg.num_registro = i;
     char* token = strtok(linea_leida, ",");
     if (token != NULL) {
         if (strcmp(token, "Male") == 0) {
@@ -214,7 +217,7 @@ void algoritmo_enn(tipoCola* c, int k) {
         // y lo vuelvo a agregar (queda al final)
         encolar(c, reg_buscado);
         
-        if (algoritmo_knn(&mm, k) != reg_buscado.diabetes) {
+        if (algoritmo_knn(&mm, k, reg_buscado.diabetes, false) != reg_buscado.diabetes) {
             nBorrados++;
         } else {
             encolar(&c2, reg_buscado);

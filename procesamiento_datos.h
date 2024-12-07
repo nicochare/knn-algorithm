@@ -12,7 +12,7 @@ void normalizar_dataset(tipoCola*);
 
 void cargar_en_cola(char*, tipoCola*);
 
-Registro procesar_linea(char*);
+Registro procesar_linea(char*, int);
 
 void algoritmo_enn(tipoCola*, int); 
 

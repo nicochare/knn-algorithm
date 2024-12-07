@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-bool algoritmo_knn(tipoMaxMonticulo* mm, int k) {
+bool algoritmo_knn(tipoMaxMonticulo* mm, int k, bool diabetes, bool interpretar_resultado) {
     int contDiabetes = 0, contNoDiabetes = 0, i = 0;
     float distancia;
     tipoElementoMaxMonticulo* arrayAux = (tipoElementoMaxMonticulo*)malloc(k * sizeof(tipoElementoMaxMonticulo));
@@ -32,17 +32,30 @@ bool algoritmo_knn(tipoMaxMonticulo* mm, int k) {
     for (i = 0; i < k; i++) {
         insertarMaxMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
     }
-    free(arrayAux);
+
 
     if (contDiabetes == contNoDiabetes && !esVacio(*mm)) {
-        return devolverRaiz(*mm).reg.diabetes;
+        if (devolverRaiz(*mm).reg.diabetes) {
+            contDiabetes++;
+        } else {
+            contNoDiabetes++;
+        }
     }
 
-    return contDiabetes > contNoDiabetes;
+    bool resultado = contDiabetes > contNoDiabetes;
+
+    if (interpretar_resultado) {
+        interpretacion_resultado(resultado, raiz.reg.num_registro, raiz.distancia, diabetes == resultado);
+    }
+    
+    free(arrayAux);
+
+    return resultado;
 }
 
-void interpretacion_resultado(bool resultado) {
-    printf("\nLa predicción de la clase dice que el sujeto");
-    if (!resultado) printf(" no");
-    printf(" tiene diabetes\n");
+void interpretacion_resultado(bool resultado, int num_registro, float distancia, bool exito) {
+    printf("\nClosest example: e = %d\n", num_registro);
+    printf("Min distance = %.6f\n", distancia);
+    printf("Prediction: Class = %d\n", resultado);
+    printf("Prediction Success = %d\n", exito);
 }

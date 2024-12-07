@@ -231,3 +231,52 @@ void algoritmo_enn(tipoCola* c, int k) {
     
     *c = c2;
 }
+
+void evolucion_acierto(char* RUTA, int k) {
+    float aciertos = 0.0;
+    tipoCola dataset;
+    nuevaCola(&dataset);
+    cargar_en_cola(RUTA, &dataset);
+    normalizar_dataset(&dataset);
+
+    int nElem = devolverCantidadElementos(dataset);
+    Registro reg_buscado;
+    tipoMaxMonticulo mm;
+    nuevoMaxMonticulo(&mm, k);
+
+    for (int i = 0; i < nElem; i++) {
+        vaciarMaxMonticulo(&mm);
+        // Tomo primer elemento, lo desencolo, hago el MM 
+        reg_buscado = frente(dataset);
+        desencolar(&dataset);
+        cargar_datos(&dataset, &mm, reg_buscado, k);
+        // y lo vuelvo a agregar (queda al final)
+        encolar(&dataset, reg_buscado);
+        
+        if (algoritmo_knn(&mm, k, true, false) == reg_buscado.diabetes) {
+            aciertos++;
+        }
+    }
+    float porcentaje = (float)(aciertos / nElem) * 100.0; 
+    printf("Accuracy for K=%d = %f\n\n", k, porcentaje);
+
+    algoritmo_enn(&dataset, k);
+
+    nElem = devolverCantidadElementos(dataset);
+    aciertos = 0.0;
+    for (int i = 0; i < nElem; i++) {
+        vaciarMaxMonticulo(&mm);
+        // Tomo primer elemento, lo borro, hago el MM 
+        reg_buscado = frente(dataset);
+        desencolar(&dataset);
+        cargar_datos(&dataset, &mm, reg_buscado, k);
+        // y lo vuelvo a agregar (queda al final)
+        encolar(&dataset, reg_buscado);
+        
+        if (algoritmo_knn(&mm, k, true, false) == reg_buscado.diabetes) {
+            aciertos++;
+        }
+    }
+    porcentaje = (float)(aciertos / nElem) * 100.0; 
+    printf("Accuracy for K=%d = %f\n\n", k, porcentaje);
+}

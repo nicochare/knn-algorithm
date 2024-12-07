@@ -13,6 +13,7 @@ int obtener_k(int max) {
     }
     return k;
 }
+
 // TODO: Realizar pruebas con diferentes % de diabéticos, varios dataset, varias k
 // TODO: Graficas Python evolucion k y precision con diferentes %
 int main() {
@@ -102,7 +103,11 @@ int main() {
     printf("\n\n\033[33m --- APARTADO 8: Pre-procesamiento del dataset mediante Algoritmo de Wilson (ENN) para K = %d\033[0m\n", k);
     algoritmo_enn(&dataset, k);
     
-    
+    // Apartado 9
+    printf("\n\n\033[33m --- APARTADO 9: Evolución de la precisión de acierto en función del número de ejemplos y la K\033[0m\n");
+    for (int i = 0; i < 10; i++) {
+        evolucion_acierto(RUTA, i);
+    }
 
     return 0;
 }

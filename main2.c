@@ -23,7 +23,7 @@ void pruebaCompleta(char* RUTA, int k) {
         // y lo vuelvo a agregar (queda al final)
         encolar(&dataset, reg_buscado);
         
-        if (algoritmo_knn(&mm, k) == reg_buscado.diabetes) {
+        if (algoritmo_knn(&mm, k, true, false) == reg_buscado.diabetes) {
             aciertos++;
         }
     }
@@ -43,7 +43,7 @@ void pruebaCompleta(char* RUTA, int k) {
         // y lo vuelvo a agregar (queda al final)
         encolar(&dataset, reg_buscado);
         
-        if (algoritmo_knn(&mm, k) == reg_buscado.diabetes) {
+        if (algoritmo_knn(&mm, k, true, false) == reg_buscado.diabetes) {
             aciertos++;
         }
     }
@@ -52,15 +52,12 @@ void pruebaCompleta(char* RUTA, int k) {
 }
 
 int main() {
-    char* rutas[11] = {"diabetes_prediction_dataset2.csv", "diabetes_subset_50_50.csv", "filtered_diabetes_subset_50_50.csv", 
-                    "diabetes_subset_55_45.csv", "filtered_diabetes_subset_55_45.csv", "diabetes_subset_60_40.csv", 
-                    "filtered_diabetes_subset_60_40.csv", "diabetes_subset_65_35.csv", "filtered_diabetes_subset_65_35.csv", 
-                    "diabetes_subset_70_30.csv", "filtered_diabetes_subset_70_30.csv"};
+    char* ruta = "diabetes_prediction_dataset2.csv";
     
 
-    printf("---RUTA: %s---\n", rutas[0]);
+    printf("---RUTA: %s---\n", ruta[0]);
     for (int i = 1; i <= 667; i++) {
-        pruebaCompleta(rutas[0], i);
+        pruebaCompleta(ruta, i);
     }
     printf("\n");
     return 0;

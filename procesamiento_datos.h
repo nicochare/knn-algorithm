@@ -16,4 +16,6 @@ Registro procesar_linea(char*, int);
 
 void algoritmo_enn(tipoCola*, int); 
 
+void evolucion_acierto(char*, int);
+
 #endif

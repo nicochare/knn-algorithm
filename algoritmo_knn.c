@@ -33,8 +33,7 @@ bool algoritmo_knn(tipoMaxMonticulo* mm, int k, bool diabetes, bool interpretar_
         insertarMaxMonticulo(mm, arrayAux[i].reg, arrayAux[i].distancia);
     }
 
-
-    if (contDiabetes == contNoDiabetes && !esVacio(*mm)) {
+    if (!esVacio(*mm) && contDiabetes == contNoDiabetes) {
         if (devolverRaiz(*mm).reg.diabetes) {
             contDiabetes++;
         } else {
@@ -47,7 +46,7 @@ bool algoritmo_knn(tipoMaxMonticulo* mm, int k, bool diabetes, bool interpretar_
     if (interpretar_resultado) {
         interpretacion_resultado(resultado, raiz.reg.num_registro, raiz.distancia, diabetes == resultado);
     }
-    
+
     free(arrayAux);
 
     return resultado;

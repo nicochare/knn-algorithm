@@ -85,39 +85,15 @@ void cargar_datos(tipoCola* c, tipoMaxMonticulo* mm, Registro reg_buscado, int k
 
 void normalizar_dataset(tipoCola* c) {
     int i = 0; 
-    //int nEjemplos = 10;
     Registro reg;
-    //Registro* array = (Registro*)malloc(10*sizeof(Registro));
     tipoCola c2;
     nuevaCola(&c2);
-
-    //printf("\nEjemplo de normalización de datos con los primeros %d registros del dataset.\n", nEjemplos);
-    
-    //printf("\nDATOS NO NORMALIZADOS\n");
     while (!esNulaCola(*c)) {
         reg = frente(*c);
         desencolar(c);
-
-        /*// Solo guardar y mostrar los 10 primeros para mostrar de ejemplo
-        if (i < nEjemplos) {
-            mostrar_registro(reg);
-            normalizar_registro(&reg);
-            printf("\n");
-            array[i] = reg;
-            i++;
-        }*/
-        
         normalizar_registro(&reg);
         encolar(&c2, reg);
     }
-
-    /*printf("\nDATOS NORMALIZADOS\n");
-    for (int j = 0; j < i; j++) {
-        mostrar_registro(array[j]);
-        printf("\n");
-    }
-
-    free(array);*/
     *c = c2;
 }
 

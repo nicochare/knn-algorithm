@@ -9,7 +9,6 @@ float mostrar_porcentaje(char* ruta) {
     char* linea_leida;
     Registro reg;
     
-    // Salto primera linea para no leer los nombres de las columnas
     linea_leida = leer_linea(fichero);
     free(linea_leida);
 
@@ -34,7 +33,6 @@ void cargar_en_cola(char* ruta, tipoCola* c) {
     char* linea_leida;
     Registro reg;
     
-    // Salto primera linea para no leer los nombres de las columnas
     linea_leida = leer_linea(fichero);
     free(linea_leida);
 
@@ -185,11 +183,10 @@ void algoritmo_enn(tipoCola* c, int k) {
 
     for (int i = 0; i < nElem; i++) {
         vaciarMaxMonticulo(&mm);
-        // Tomo primer elemento, lo borro, hago el MM 
+
         reg_buscado = frente(*c);
         desencolar(c);
         cargar_datos(c, &mm, reg_buscado, k);
-        // y lo vuelvo a agregar (queda al final)
         encolar(c, reg_buscado);
         
         if (algoritmo_knn(&mm, k, reg_buscado.diabetes, false) != reg_buscado.diabetes) {
@@ -220,11 +217,10 @@ void evolucion_acierto(char* RUTA, int k) {
 
     for (int i = 0; i < nElem; i++) {
         vaciarMaxMonticulo(&mm);
-        // Tomo primer elemento, lo desencolo, hago el MM 
+
         reg_buscado = frente(dataset);
         desencolar(&dataset);
         cargar_datos(&dataset, &mm, reg_buscado, k);
-        // y lo vuelvo a agregar (queda al final)
         encolar(&dataset, reg_buscado);
         
         if (algoritmo_knn(&mm, k, true, false) == reg_buscado.diabetes) {
@@ -240,11 +236,10 @@ void evolucion_acierto(char* RUTA, int k) {
     aciertos = 0.0;
     for (int i = 0; i < nElem; i++) {
         vaciarMaxMonticulo(&mm);
-        // Tomo primer elemento, lo borro, hago el MM 
+
         reg_buscado = frente(dataset);
         desencolar(&dataset);
         cargar_datos(&dataset, &mm, reg_buscado, k);
-        // y lo vuelvo a agregar (queda al final)
         encolar(&dataset, reg_buscado);
         
         if (algoritmo_knn(&mm, k, true, false) == reg_buscado.diabetes) {

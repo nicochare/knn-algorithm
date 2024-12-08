@@ -13,8 +13,8 @@ with open('datasets/porcentajes_processed.csv', 'r') as csvfile:
         y_axis_preENN.append(float(row[1]))
         y_axis_postENN.append(float(row[2]))
 
-plt.plot(x_axis, y_axis_preENN, label = "Antes de ENN")
-plt.plot(x_axis, y_axis_postENN, label = "Despues de ENN")
+plt.plot(x_axis, y_axis_preENN, label = "Antes de ENN", linewidth=3.5)
+plt.plot(x_axis, y_axis_postENN, label = "Despues de ENN", linewidth=3.5)
 plt.xlim(0, 675)
 plt.ylim(0, 105)
 plt.xticks([0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600, 625, 650, 675])

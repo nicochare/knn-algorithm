@@ -3,7 +3,7 @@
 
 typedef struct registro {
     int num_registro;
-    float gender; // 0 = Hombre, 1 = Mujer
+    float gender; 
     float age;
     float hypertension;
     float heart_disease;
@@ -11,7 +11,7 @@ typedef struct registro {
     float bmi;
     float HbA1c_level;
     float blood_glucose_level;
-    float diabetes; // 0 = No tiene, 1 = Tiene
+    float diabetes; 
 } Registro;
 
 float normalizar(float, float, float);

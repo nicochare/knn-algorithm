@@ -5,7 +5,7 @@ x_axis = []
 y_axis_preENN = []
 y_axis_postENN = []
 
-with open('porcentajes_processed.csv', 'r') as csvfile:
+with open('datasets/porcentajes_processed.csv', 'r') as csvfile:
     next(csvfile) # saltar primera linea
     lines = csv.reader(csvfile, delimiter=',')
     for row in lines:

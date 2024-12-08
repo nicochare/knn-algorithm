@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#define RUTA "diabetes_prediction_dataset2.csv"
+#define RUTA "diabetes_prediction_dataset.csv"
 
 int obtener_k(int max) {
     int k = 0;

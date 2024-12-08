@@ -1,4 +1,6 @@
-usar en linux
+para compilar: make
+
+para ejecutar: ./main.o
 
 1. Introducción de los datos del dataset del problema
 2. Normalización de los valores de los atributos numéricos del dataset
@@ -9,10 +11,3 @@ usar en linux
 7. Clasificación de un conjunto de ejemplos para K=k
 8. Pre-procesamiento del dataset mediante Algoritmo de Wilson (ENN)
 9. Evolución de la precisión de acierto en función del número de ejemplos y la K
-
-###### messi
-##### messi
-#### messi
-### messi
-## messi
-# messi
